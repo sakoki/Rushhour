@@ -1,0 +1,17 @@
+#PBS -N scraping_sfmta
+#PBS -M linyange@umich.edu
+#PBS -m abe
+
+
+#PBS  -A si699w18_flux 
+#PBS -l nodes=1,mem=2gb,walltime=10:00:00,qos=flux 
+
+#PBS -q flux
+#PBS -j oe
+
+cd /scratch/si699w19_flux/linyange/Rushhour/code
+source activate rushhour
+
+python scraping_sfmta.py
+
+echo"============= pbs scrapng_sfmta success ======================"
