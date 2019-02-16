@@ -1,16 +1,22 @@
 import geopandas as gpd
-import matplotlib.pyplot as plt
 import pandas as pd
-import requests
-import urllib
 import json
 import re
 import os
 from shapely.geometry import Point
 from decorators import timer
 
-# Specifiy directory containing shape file
-census_zone = '../raw_data/census_zones/sf/geo_export_8ddce19a-2ba8-4da5-8c6c-28ee960b9bc6.shp'
+
+print("Please enter the location of the census zone shape file.")
+print("For example: '../raw_data/<file_name>.shp'")
+census_zone = input("Location of census zone shape file:")
+census_zone = gpd.GeoDataFrame.from_file(census_zone)
+
+
+# Specify directory of raw sf census zone shape file 
+census_zone = input("Enter location of census zone shape file:"")
+print("Example ")
+# '../raw_data/census_zones/sf/geo_export_8ddce19a-2ba8-4da5-8c6c-28ee960b9bc6.shp'
 census_zone = gpd.GeoDataFrame.from_file(census_zone)
 
 # Specify the path for input and output data
