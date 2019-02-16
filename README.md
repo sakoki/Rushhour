@@ -13,7 +13,7 @@ Explore the application of dynamic regional data captured by social media to pre
 -   Restricted files (protected information, licensed files, university property, etc) are not linked. 
 
 |                                                               Files                                                               |                    Description                   |
-| :-------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------: |
+| :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
 |                                                              Twitter                                                              |   Tweets provided by the University of Michigan  |
 |                     [SFData](https://data.sfgov.org/Transportation/Historical-raw-AVL-GPS-data/5fk7-ivit/data)                    |             SFMTA vehicle speed data             |
 | [2010 SF Census Zones](https://data.sfgov.org/Geographic-Locations-and-Boundaries/Census-2010-Tracts-for-San-Francisco/rarb-5ahf) | GIS data of San Francisco census zone boundaries |
@@ -23,7 +23,7 @@ Explore the application of dynamic regional data captured by social media to pre
 -   Links to useful resources
 
 |                                                                     Page                                                                    |                                                         Description                                                         |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
+| :----------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
 |            [Twitter users by year](https://www.statista.com/statistics/274564/monthly-active-twitter-users-in-the-united-states/)           |                  Overview by the number of twitter users per year. Most users appear to be from 2016 - 2018                 |
 |                             [Average Uber Trip Distance](http://www.sherpashareblog.com/tag/uber-trip-distance/)                            | Average uber trip distance covers a range of 5.5~ miles. May be useful as a measure to define the boundaries of travel data |
 |                          [SARIMA](https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/)                         |                         A nice tutorial on Seasonal ARIMA. Potentially use for baseline predictions                         |
