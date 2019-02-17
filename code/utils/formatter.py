@@ -4,7 +4,6 @@ import json
 import re
 import os
 from shapely.geometry import Point
-from decorators import timer
 
 
 # Specify the path for input and output data
@@ -49,7 +48,7 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
                         new_file.write(line + '\n')
 
 
-def coordinate_mapper(shp_file, input_dir, output_dir, file_name, how='within'): 
+def coordinate_mapper(shp_file, input_dir, output_dir, file_name): 
     """Accepts lat, lon coordinates and maps it to corresponding polygon 
     
     :param str shp_file: location of shape file
@@ -58,11 +57,12 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, how='within'):
     :param str file_name: name of file 
     :param str how: how to perform the joining
     """
+    
     census_zone = gpd.GeoDataFrame.from_file(shp_file)
         
     # Parse datetime 
     dateparse = lambda dates: [pd.datetime.strptime(d, '%m/%d/%Y %H:%M:%S') for d in dates]
-    coordinates = pd.read_csv(input_dir + filename, parse_dates=['REPORT_TIME'], date_parser=dateparse)
+    coordinates = pd.read_csv(input_dir + file_name, parse_dates=['REPORT_TIME'], date_parser=dateparse)
     
     # Convert lat & lon points to Point geometry shape 
     geom = coordinates.apply(lambda x: Point(x['LONGITUDE'], x['LATITUDE']), axis=1)
@@ -73,8 +73,6 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, how='within'):
     
     # Map coordinates to to census zones 
     # specify operation(op) to 'within' maps points that are within polygons 
-    mapped_coordinates gpd.sjoin(coordinates, census_zone, op='within')
+    mapped_coordinates = gpd.sjoin(coordinates, census_zone, op='within')
 
-    mapped_coordinates.to_csv(output_dir + file_name, index=False)
-    
-    
+    mapped_coordinates.to_csv(output_dir + 'mapped_' + file_name, index=False)
