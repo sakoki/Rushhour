@@ -1,8 +1,6 @@
 import geopandas as gpd
 import pandas as pd
-import json
 import re
-import os
 from shapely.geometry import Point
 
 
@@ -48,21 +46,20 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
                         new_file.write(line + '\n')
 
 
-def coordinate_mapper(shp_file, input_dir, output_dir, file_name): 
+def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=[0:5]):
     """Accepts lat, lon coordinates and maps it to corresponding polygon 
     
     :param str shp_file: location of shape file
     :param str input_dir: directory containing input files
     :param str output_dir: directory to save output files
-    :param str file_name: name of file 
-    :param str how: how to perform the joining
+    :param str file_name: name of file
     """
     
     census_zone = gpd.GeoDataFrame.from_file(shp_file)
         
     # Parse datetime 
     dateparse = lambda dates: [pd.datetime.strptime(d, '%m/%d/%Y %H:%M:%S') for d in dates]
-    coordinates = pd.read_csv(input_dir + file_name, parse_dates=['REPORT_TIME'], date_parser=dateparse)
+    coordinates = pd.read_csv(input_dir + file_name, parse_dates=['REPORT_TIME'], date_parser=dateparse)columns
     
     # Convert lat & lon points to Point geometry shape 
     geom = coordinates.apply(lambda x: Point(x['LONGITUDE'], x['LATITUDE']), axis=1)
