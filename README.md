@@ -2,10 +2,11 @@
 
 _Author: Koki Sasagawa, Alicia Ge_  
 _Created on: 1/27/19_ 
+_Updated on: 2/18/2019_
 
 ## Project Idea
 
-Explore the application of dynamic regional data captured by social media to predict traffic demands to optimize Uber rides.
+Explore the application of dynamic regional data captured by social media to predict traffic conditions.
 
 ## Data Table
 
