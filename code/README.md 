@@ -1,11 +1,16 @@
 # File Description
 
-    |-utils
+    |- utils
+      |- __init__.py
       |- decorators.py
-      |- region_mapper.py
-      |- file_cleaner.py
-    |- playground
-      | -
+      |- formatter.py
+      |- toolkit
+      |- __pychache__
+    |- crawling_sfmta_data.ipynb
+    |- exploratory.ipynb
+    |- ARIMA_baseline.ipynb
+    |- scraping_sfmta.py
+    |- Census_Tracts_Exploratoy.ipynb
 
 -   Choosing time frame of tweet data (window of dates, how much in advance?)
     -   Mention an event prior to its occurrence e.g., "Excited for the SF Giants baseball home game on March 17th!"
