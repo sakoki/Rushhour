@@ -46,30 +46,35 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
                         new_file.write(line + '\n')
 
 
-def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=[0:5]):
-    """Accepts lat, lon coordinates and maps it to corresponding polygon 
-    
-    :param str shp_file: location of shape file
+def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(range(0,6))):
+    """Accepts lat, lon coordinates and maps it to corresponding census polygon
+
+    :param shp_file: GIS boundary shape file
+    :type shp_file: geopandas.geodataframe.GeoDataFrame
     :param str input_dir: directory containing input files
     :param str output_dir: directory to save output files
     :param str file_name: name of file
     """
-    
-    census_zone = gpd.GeoDataFrame.from_file(shp_file)
-        
-    # Parse datetime 
-    dateparse = lambda dates: [pd.datetime.strptime(d, '%m/%d/%Y %H:%M:%S') for d in dates]
-    coordinates = pd.read_csv(input_dir + file_name, parse_dates=['REPORT_TIME'], date_parser=dateparse)columns
-    
-    # Convert lat & lon points to Point geometry shape 
-    geom = coordinates.apply(lambda x: Point(x['LONGITUDE'], x['LATITUDE']), axis=1)
+
+    census_zone = shp_file
+    # uncomment if we want to accept location of shape file #
+    # census_zone = gpd.GeoDataFrame.from_file(shp_file)
+
+    # dateparse = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %H:%M:%S')
+    coordinates = pd.read_csv(input_dir + file_name,
+                              parse_dates=['REPORT_TIME'],
+                              # date_parser=dateparse,
+                              usecols=columns,
+                              infer_datetime_format=True)
+
+    # Convert lat & lon points ot Point geometry shape and create a new geopandas dataframe
+    geom = pd.Series(zip(coordinates['LONGITUDE'], coordinates['LATITUDE'])).apply(Point)
     coordinates = gpd.GeoDataFrame(coordinates, geometry=geom)
     
     # Check crs of two dataframe match before merging
     coordinates.crs = census_zone.crs
-    
-    # Map coordinates to to census zones 
-    # specify operation(op) to 'within' maps points that are within polygons 
+
+    # specify operation(op) to 'within' to map points that are within polygons
     mapped_coordinates = gpd.sjoin(coordinates, census_zone, op='within')
 
     mapped_coordinates.to_csv(output_dir + 'mapped_' + file_name, index=False)
