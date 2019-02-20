@@ -77,8 +77,8 @@ def prediction_table_generator(data, x_idx, y_idx):
     | region_ID | x | y |
     +-----------+---+---+
     region_ID --> unique identifier for census zones
-    x --> list of training values
-    y --> prediction value
+    x --> list of training values (columns N-1)
+    y --> prediction value (column N)
 
     :param DataFrame data: data to be formatted into training
     :param int x_idx: index setting the limit of training values (x)
@@ -91,12 +91,12 @@ def prediction_table_generator(data, x_idx, y_idx):
     region_id = data.iloc[:, 0]
 
     # Create column containing list of training values
-    input_x = data.iloc[:, list(range(1, x_idx))]
+    input_x = data.iloc[:, list(range(1, x_idx+1))]
     input_x = input_x.apply(lambda x: x.tolist(), axis=1)
     input_x.rename('x', inplace=True)
 
     # Create Series of y values
-    if y == x_idx + 1:
+    if y_idx == x_idx + 1:
         output_y = data.iloc[:, y_idx]
         output_y.rename('y', inplace=True)
     else:
