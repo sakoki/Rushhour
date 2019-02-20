@@ -77,3 +77,5 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(r
     mapped_coordinates = gpd.sjoin(coordinates, census_zone, op='within')
 
     mapped_coordinates.to_csv(output_dir + 'mapped_' + file_name, index=False)
+
+    return mapped_coordinates
