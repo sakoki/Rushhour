@@ -1,9 +1,10 @@
+import pandas as pd
 from toolkit import get_fname
 
 
 def generate_fname_wPath(DIR, region_id, attr =False):
-    """Generate file name with whole path
-    """
+    """Generate file name with whole path"""
+
 #     # avoid file name with "'"
 #     if "'" in attr:
 #         attr = attr.replace("'", "_")
@@ -22,21 +23,23 @@ def normalize(df):
     return df_scale
 
 
-def region_by_time_generator(path, columns=['REPORT_TIME'],Y = 'SPEED',unit = 'H'):
-    """take a directory of user files into a frequency level time series.(mean)
-    Actually it now returns a pandas series, which is the input of 'def predict_time_series_ARIMA function()'
-    
-    Inputs:
-    path: the output file dir of 'def aggregate_to_region()'
-    columns: the list column name string that need to convert to date
-    Y: a string of one column that need to be treated as Y
-    unit: time granularity. eg, 'H'
-    aggregate_func: a function name, specifies how to aggragate data points.
-    
-    Output:
-    new_time_df.iloc[0]: a pandas series with time as index, 
-                         mean(or other aggregate_func()) speed within one hour(or other time granularity) as data.
+def region_by_time_generator(path, Y='SPEED', unit='H'):
+    """Format data into a frequency level time series
+
+    Rows are region_ID and columns are time (based on unit specified).
+    Speed os aggregated (currently takes the mean) based on the time granularity specified.
+    The output is the input for the function `predict_time_series_ARIMA()`.
+
+    .. todo:: datetime conversion no longer necessary as it is handled by `coordinate_mapper()`
+        implement `aggregate_func()`
+
+     :param path: input directory containing files of interest
+     :param str Y: specification of name of the column to be treated as Y
+     :param str unit: specification for time granularity
+     :return: formatted table
+     :rtype: DataFrame
     """
+
     print('begin create_time_df')
     f_names = get_fname(path)
     new_time_df = pd.DataFrame()
@@ -69,20 +72,18 @@ def region_by_time_generator(path, columns=['REPORT_TIME'],Y = 'SPEED',unit = 'H
 def prediction_table_generator(data, x_idx, y_idx):
     """Generate subsets of the data split into training values (x) and prediction value (y)
 
-    The resulting dataframe will contain 3 columns:
-
-    region_ID | x | y |
-
-    Where:
+    The resulting DataFrame will contain 3 columns:
+    +-----------+---+---+
+    | region_ID | x | y |
+    +-----------+---+---+
     region_ID --> unique identifier for census zones
     x --> list of training values
     y --> prediction value
 
-    :param data: data to be formatted into training
-    :type data: DataFrame
+    :param DataFrame data: data to be formatted into training
     :param int x_idx: index setting the limit of training values (x)
     :param int y_idx: index of prediction value (y)
-    :return: prediction table 
+    :return: prediction table
     :rtype: DataFrame
     """
 
@@ -104,6 +105,7 @@ def prediction_table_generator(data, x_idx, y_idx):
 
     prediction_table = pd.concat([region_id, input_x, output_y], axis=1)
 
-    prediction_table.to_csv('data_{}_{}.csv'.format(x_idx, y_idx), index=False)
+    # uncomment if you want to save files
+    # prediction_table.to_csv('data_{}_{}.csv'.format(x_idx, y_idx), index=False)
 
     return prediction_table
