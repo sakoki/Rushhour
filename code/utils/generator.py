@@ -69,7 +69,7 @@ def region_by_time_generator(path, Y='SPEED', unit='H'):
     return new_time_df_scale
 
 
-def prediction_table_generator(data, x_idx, y_idx):
+def prediction_table_generator(data, y_idx):
     """Generate subsets of the data split into training values (x) and prediction value (y)
 
     The resulting DataFrame will contain 3 columns:
@@ -77,11 +77,10 @@ def prediction_table_generator(data, x_idx, y_idx):
     | region_ID | x | y |
     +-----------+---+---+
     region_ID --> unique identifier for census zones
-    x --> list of training values (columns N-1)
+    x --> list of training values (columns 1 to N-1)
     y --> prediction value (column N)
 
     :param DataFrame data: data to be formatted into training
-    :param int x_idx: index setting the limit of training values (x)
     :param int y_idx: index of prediction value (y)
     :return: prediction table
     :rtype: DataFrame
@@ -91,17 +90,13 @@ def prediction_table_generator(data, x_idx, y_idx):
     region_id = data.iloc[:, 0]
 
     # Create column containing list of training values
-    input_x = data.iloc[:, list(range(1, x_idx+1))]
+    input_x = data.iloc[:, list(range(1, y_idx))]
     input_x = input_x.apply(lambda x: x.tolist(), axis=1)
     input_x.rename('x', inplace=True)
 
     # Create Series of y values
-    if y_idx == x_idx + 1:
-        output_y = data.iloc[:, y_idx]
-        output_y.rename('y', inplace=True)
-    else:
-        print('y_idx must be greater than x_idx by 1')
-        return
+    output_y = data.iloc[:, y_idx]
+    output_y.rename('y', inplace=True)
 
     prediction_table = pd.concat([region_id, input_x, output_y], axis=1)
 
