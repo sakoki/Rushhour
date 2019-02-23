@@ -1,6 +1,6 @@
 
 # File Description
-_Creted on : 2/18/2019 Updated on:2/23/2019
+_Created on : 2/18/2019 Updated on:2/23/2019_
 
     |- __pychache__
     |- utils
