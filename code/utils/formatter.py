@@ -4,7 +4,6 @@ import re
 from shapely.geometry import Point
 
 
-# Specify the path for input and output data
 def SFDATA_file_cleaner(input_dir, output_dir, file_name):
     """Reads in SFData GPS/AVL speed data and formats them into proper csv files
 
@@ -49,15 +48,17 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
 def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(range(0,6))):
     """Accepts lat, lon coordinates and maps it to corresponding census polygon
 
-    :param str shp_file: location of GIS boundary shape file
+    :param DataFrame shp_file: GIS boundary dataframe
     :param str input_dir: directory containing input files
     :param str output_dir: directory to save output files
     :param str file_name: name of file
+    :return: table of data mapped to corresponding polygon
+    :rtype: DataFrame
     """
 
-    # census_zone = shp_file
-    # uncomment if we want to accept location of shape file #
-    census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
+    census_zone = shp_file
+    # uncomment code below if we want to accept location of shape file
+    # census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
 
     # dateparse = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %H:%M:%S')
     coordinates = pd.read_csv(input_dir + file_name,

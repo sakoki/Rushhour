@@ -11,12 +11,16 @@ def get_fname(path,contains = '2016'):
     return file
 
 
-def create_time_df(path, columns=[], Y='SPEED', unit='H', drop=True):
+def create_time_table(path, columns=[], Y='SPEED', unit='H', drop=True):
     """Take a directory of files and groups it into frequency level time series
 
-
-
-
+    :param str path:
+    :param list columns:
+    :param str y:
+    :param str unit:
+    :param bool drop:
+    :return: formatted table
+    :rtype: DataFrame
     """
 
     f_names = get_fname(path)

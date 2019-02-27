@@ -33,11 +33,11 @@ def region_by_time_generator(path, Y='SPEED', unit='H'):
     .. todo:: datetime conversion no longer necessary as it is handled by `coordinate_mapper()`
         implement `aggregate_func()`
 
-     :param path: input directory containing files of interest
-     :param str Y: specification of name of the column to be treated as Y
-     :param str unit: specification for time granularity
-     :return: formatted table
-     :rtype: DataFrame
+    :param path: input directory containing files of interest
+    :param str Y: specification of name of the column to be treated as Y
+    :param str unit: specification for time granularity
+    :return: formatted table
+    :rtype: DataFrame
     """
 
     print('begin create_time_df')
