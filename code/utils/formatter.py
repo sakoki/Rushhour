@@ -3,6 +3,10 @@ import pandas as pd
 import re
 from shapely.geometry import Point
 
+def SFDATA_file_cleaner_all(input_dir, output_dir, file_name):
+    for fname in  file_name:
+        SFDATA_file_cleaner(input_dir, output_dir, fname)
+
 
 # Specify the path for input and output data
 def SFDATA_file_cleaner(input_dir, output_dir, file_name):
