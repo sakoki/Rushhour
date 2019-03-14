@@ -1,4 +1,3 @@
-import pandas as pd
 import re
 import os
 
@@ -15,8 +14,17 @@ def get_fname(path,contains = '2016'):
 
 def check_dir_exist(path):
     if os.path.isdir(path):
-        pass
+        print('directory %s exists'%(path))
     else:
         print('Creating new directory...')
-        command = 'mkdir {}'.format(path)
+        command = 'mkdir -p {}'.format(path)
         os.system(command)
+
+def generate_fname_wPath(DIR, region_id, attr =False):
+    """Generate file name with whole path
+    """
+#     # avoid file name with "'"
+#     if "'" in attr:
+#         attr = attr.replace("'", "_")
+    fname_wPath = '%s/%s_%s.csv'%(DIR,attr,region_id)
+    return fname_wPath
