@@ -1,2 +1,7 @@
+# for FLUX server
 /raw_data
 /pbs_files
+
+
+/output
+*/.ipynb_checkpoints/*
