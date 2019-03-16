@@ -2,14 +2,11 @@ import pandas as pd
 from toolkit import get_fname
 
 
-def generate_fname_wPath(DIR, region_id, attr =False):
+def generate_fname_w_path(root_dir, name, attr):
     """Generate file name with whole path"""
 
-#     # avoid file name with "'"
-#     if "'" in attr:
-#         attr = attr.replace("'", "_")
-    fname_wPath = '%s/%s_%s.csv'%(DIR,attr,region_id)
-    return fname_wPath
+    fname = '{}/{}_{}.csv'.format(root_dir, attr, region_id)
+    return fname
 
 
 def normalize(df):
@@ -40,25 +37,16 @@ def region_by_time_generator(path, Y='SPEED', unit='H'):
     :rtype: DataFrame
     """
 
-    print('begin create_time_df')
-    f_names = get_fname(path)
+    file_names = get_fname(path)
     new_time_df = pd.DataFrame()
-    for file_name in f_names:
-        data_user = pd.read_csv(path+file_name)
 
-        # df_user = convert_date(data_user,columns=columns)
-        df_user = data_user
+    for name in file_names:
+        data = pd.read_csv(path + name)
 
-        # select the column that is the Y 
-        # col_inf = [i for i in df_user.columns if Y in i][0]
-        col_inf = Y
-
-        print('begin resample')
         # group second data into one time unit.
-        unitly_aggr = df_user[col_inf].resample(unit).mean()
-        # unitly_aggr.plot(style = [':','--','-'])
+        unitly_aggr = data[Y].resample(unit).mean()
 
-        print('finish resample')
+
         # turn a series of data into a row(with dataframe type).
         weekly_transposed = unitly_aggr.to_frame(name=re.sub("time_series_|\.csv", "", file_name))
         weekly_transposed = weekly_transposed.transpose()

@@ -1,14 +1,23 @@
 import pandas as pd
 import re
+import os
 
 
-def get_fname(path,contains = '2016'):
-    # get file name for all subfiles for the whole ukwac corpus.
-    file = [f for f in os.listdir(path) if re.search('(.+\.csv$)', f)]
+def get_fname(path, contains=None):
+    """Retrieve names of all csv files in directory
+
+    :param str path: input directory containing files of interest
+    :param str contains: specify key word to identify file of interest
+    :return: list of sorted file names
+    :rtype: list of str
+    """
+
+    file_list = [f for f in os.listdir(path) if re.search('(.+\.csv$)', f)]
     if contains:
-        file = [f for f in file if contains in f]
-    file = sorted(file)
-    return file
+        file_list = [f for f in file_list if contains in f]
+    file_list = sorted(file_list)
+
+    return file_list
 
 
 def create_time_table(path, columns=[], Y='SPEED', unit='H', drop=True):
