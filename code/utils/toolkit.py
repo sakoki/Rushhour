@@ -16,7 +16,7 @@ def check_dir_exist(path):
     if os.path.isdir(path):
         print('directory %s exists'%(path))
     else:
-        print('Creating new directory...')
+        print('Creating new directory: %s'%(path))
         command = 'mkdir -p {}'.format(path)
         os.system(command)
 

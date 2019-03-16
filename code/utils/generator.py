@@ -16,6 +16,8 @@ def generate_fname_wPath(DIR, region_id, attr =False):
 def normalize(df, with_std=False):
     # fill na
     df = df.fillna(0)
+    print(df.columns)
+
     # scale data. output: ndarray
     scaler = StandardScaler(with_std=with_std)
 
@@ -42,7 +44,7 @@ def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H',
                          mean(or other aggregate_func()) speed within one hour(or other time granularity) as data.
     """
     print('begin create_time_df')
-    f_names = get_fname(path)
+    f_names = get_fname(path,contains='')
     new_time_df = pd.DataFrame()
     for file_name in f_names:
         data_user = pd.read_csv(path + file_name, parse_dates=columns)
@@ -59,13 +61,19 @@ def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H',
         # turn a series of data into a row(with dataframe type).
         weekly_transposed = unitly_aggr.to_frame(name=re.sub("time_series_|\.csv", "", file_name))
         weekly_transposed = weekly_transposed.transpose()
+
         # add into final result
         new_time_df = pd.concat([new_time_df, weekly_transposed])
+
     print('finish create_time_df')
+    print('df shape:',new_time_df.shape)
     # normalize the data frame
     new_time_df_new = normalize(new_time_df,with_std = with_std)
     if outfname:
-        new_time_df_new .to_csv(outdir+outfname, index=None)
+
+        new_time_df_new .to_csv(outdir+outfname, index=True)
+        print('successfully output csv file')
+
 
     return new_time_df_new
 

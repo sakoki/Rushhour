@@ -7,7 +7,8 @@ from shapely.geometry import Point
 from utils.toolkit import get_fname, generate_fname_wPath
 
 def SFDATA_file_cleaner_all(input_dir, output_dir, file_name):
-    for fname in  file_name:
+    print('SFDATA_file_cleaner_all:',file_name)
+    for fname in file_name:
         SFDATA_file_cleaner(input_dir, output_dir, fname)
 
 
@@ -51,9 +52,25 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
                     if line != '\n':
                         line = line.rstrip()
                         new_file.write(line + '\n')
+    print('finish clean file and saved in',output_dir + file_name)
 
+def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=list(range(0,6))):
+    """
 
-def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(range(0,6))):
+    :param str shp_file: location of GIS boundary shape file
+    :param input_dir:
+    :param output_dir:
+    :param str file_name: list name of file
+
+    :return:
+    """
+    # census_zone = shp_file
+    # uncomment if we want to accept location of shape file #
+    census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
+    for fname in file_name:
+        coordinate_mapper(census_zone, input_dir, output_dir, fname, columns=list(range(0, 6)))
+
+def coordinate_mapper(census_zone, input_dir, output_dir, file_name, columns=list(range(0,6))):
     """Accepts lat, lon coordinates and maps it to corresponding census polygon
 
     :param str shp_file: location of GIS boundary shape file
@@ -62,9 +79,7 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(r
     :param str file_name: name of file
     """
 
-    # census_zone = shp_file
-    # uncomment if we want to accept location of shape file #
-    census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
+
 
     # dateparse = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %H:%M:%S')
     coordinates = pd.read_csv(input_dir + file_name,
@@ -74,7 +89,7 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(r
                               infer_datetime_format=True)
 
     # Convert lat & lon points ot Point geometry shape and create a new geopandas dataframe
-    geom = pd.Series(zip(coordinates['LONGITUDE'], coordinates['LATITUDE'])).apply(Point)
+    geom = pd.Series(list(zip(coordinates['LONGITUDE'], coordinates['LATITUDE']))).apply(Point)
     coordinates = gpd.GeoDataFrame(coordinates, geometry=geom)
     
     # Check crs of two dataframe match before merging
