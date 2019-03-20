@@ -3,5 +3,9 @@
 /pbs_files
 
 
+/raw_data/*
+!/raw_data/census_zones/sf/*
 /output
 */.ipynb_checkpoints/*
+.idea/*
+code/playground/.ipynb_checkpoints/
