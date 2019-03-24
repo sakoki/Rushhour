@@ -1,18 +1,17 @@
 import geopandas as gpd
 import pandas as pd
-import re, os
+import re
+import os
 from shapely.geometry import Point
+from toolkit import get_fname, generate_fname_wPath
 
-# own functions
-from utils.toolkit import get_fname, generate_fname_wPath
 
 def SFDATA_file_cleaner_all(input_dir, output_dir, file_name):
-    print('SFDATA_file_cleaner_all:',file_name)
+    # print('SFDATA_file_cleaner_all:',file_name)
     for fname in file_name:
         SFDATA_file_cleaner(input_dir, output_dir, fname)
 
 
-# Specify the path for input and output data
 def SFDATA_file_cleaner(input_dir, output_dir, file_name):
     """Reads in SFData GPS/AVL speed data and formats them into proper csv files
 
@@ -52,8 +51,10 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
                     if line != '\n':
                         line = line.rstrip()
                         new_file.write(line + '\n')
-    print('finish clean file and saved in',output_dir + file_name)
 
+    print('{} cleaned'.format(file_name))
+
+    
 def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=list(range(0,6))):
     """
 
@@ -70,16 +71,15 @@ def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=li
     for fname in file_name:
         coordinate_mapper(census_zone, input_dir, output_dir, fname, columns=list(range(0, 6)))
 
-def coordinate_mapper(census_zone, input_dir, output_dir, file_name, columns=list(range(0,6))):
+        
+def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(range(0,6))):
     """Accepts lat, lon coordinates and maps it to corresponding census polygon
 
-    :param str shp_file: location of GIS boundary shape file
+    :param str shp_file: GIS boundary shape file
     :param str input_dir: directory containing input files
     :param str output_dir: directory to save output files
     :param str file_name: name of file
     """
-
-
 
     # dateparse = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %H:%M:%S')
     coordinates = pd.read_csv(input_dir + file_name,
@@ -89,14 +89,14 @@ def coordinate_mapper(census_zone, input_dir, output_dir, file_name, columns=lis
                               infer_datetime_format=True)
 
     # Convert lat & lon points ot Point geometry shape and create a new geopandas dataframe
-    geom = pd.Series(list(zip(coordinates['LONGITUDE'], coordinates['LATITUDE']))).apply(Point)
+    geom = pd.Series(zip(coordinates['LONGITUDE'], coordinates['LATITUDE'])).apply(Point)
     coordinates = gpd.GeoDataFrame(coordinates, geometry=geom)
     
     # Check crs of two dataframe match before merging
-    coordinates.crs = census_zone.crs
+    coordinates.crs = shp_file.crs
 
     # specify operation(op) to 'within' to map points that are within polygons
-    mapped_coordinates = gpd.sjoin(coordinates, census_zone, op='within')
+    mapped_coordinates = gpd.sjoin(coordinates, shp_file, op='within')
 
     mapped_coordinates.to_csv(output_dir + 'mapped_' + file_name, index=False)
 

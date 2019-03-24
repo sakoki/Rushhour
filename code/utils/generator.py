@@ -77,6 +77,7 @@ def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H',
 
     return new_time_df_new
 
+
 def prediction_table_generator(data, N):
     """Generate subsets of the data split into training values (x) and prediction value (y)
 
@@ -112,3 +113,46 @@ def prediction_table_generator(data, N):
     # prediction_table.to_csv('data_up_to_{}.csv'.format(N), index=False)
 
     return prediction_table
+
+
+def create_graph(file):
+    """Accept GIS DataFrame and returns network graph
+
+    Example structure of DataFrame:
+    +-----------+----------------------+
+    | unique_ID | geometry             |
+    +-----------+----------------------+
+    | 12345     | POLYGON((-122.23...))|
+    +-----------+----------------------+
+    | ...       | ...                  |
+    +-----------+----------------------+
+    unique_ID --> unique identifier for GIS structure
+    geometry --> GIS POLYGON geometric structure
+
+    Each entry (row) in the DataFrame is initialized as a vertex.
+    For each POLYGON, if any points touch another POLYGON, an
+    edge will be created between the vertices.
+
+    The unique_ID and GIS POLYGON structure will be stored as
+    node attributes.
+
+    :param DataFrame file: table of GIS POLYGON structures
+    :return: network graph
+    :rtype: networkx.classes.graph.Graph
+    """
+
+    G = nx.Graph()
+    i = 1
+
+    for shp in file.itertuples():
+        G.add_node(i, block=shp[2], geoid=shp[1])
+        i += 1
+
+    for n in G.nodes(data=True):
+        state = n[1]['block']
+        for o in G.nodes(data=True):
+            other = o[1]['block']
+            if state != other and state.touches(other):
+                G.add_edge(n[0], o[0])
+
+    return G
