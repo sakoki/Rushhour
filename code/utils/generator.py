@@ -119,13 +119,13 @@ def create_graph(file):
     """Accept GIS DataFrame and returns network graph
 
     Example structure of DataFrame:
-    +-----------+----------------------+
-    | unique_ID | geometry             |
-    +-----------+----------------------+
-    | 12345     | POLYGON((-122.23...))|
-    +-----------+----------------------+
-    | ...       | ...                  |
-    +-----------+----------------------+
+    +-----------+-----------------------+
+    | unique_ID | geometry              |
+    +-----------+-----------------------+
+    | 12345     | POLYGON((-122.23...)) |
+    +-----------+-----------------------+
+    | ...       | ...                   |
+    +-----------+-----------------------+
     unique_ID --> unique identifier for GIS structure
     geometry --> GIS POLYGON geometric structure
 
