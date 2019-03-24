@@ -59,7 +59,8 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
 
     print('{} cleaned'.format(file_name))
 
-
+####
+# TO DO: move out of utils folder, move to pipeline since all it is only wrapping the function in a for-loop
 def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=list(range(0, 6))):
     """
 
@@ -75,12 +76,12 @@ def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=li
     census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
     for fname in file_name:
         coordinate_mapper(census_zone, input_dir, output_dir, fname, columns=list(range(0, 6)))
-
+####
 
 def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(range(0, 6))):
     """Accepts lat, lon coordinates and maps it to corresponding census polygon
 
-    :param str shp_file: GIS boundary shape file
+    :param DataFrame shp_file: GIS boundary data table
     :param str input_dir: directory containing input files
     :param str output_dir: directory to save output files
     :param str file_name: name of file
