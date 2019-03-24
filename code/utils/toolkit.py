@@ -17,7 +17,8 @@ def check_dir_exist(path):
         command = 'mkdir -p {}'.format(path)
         os.system(command)
 
-
+# TO DO: defined twice
+# Consider removing
 def generate_fname_wPath(DIR, region_id, attr=False):
     """Generate file name with whole path"""
     # avoid file name with "'"

@@ -1,3 +1,7 @@
+# TO DO: Split into separate functions &
+# move into model data prep
+# Make a new notebook under models
+
 from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error,mean_absolute_error
 

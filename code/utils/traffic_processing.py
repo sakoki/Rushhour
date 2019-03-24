@@ -10,12 +10,13 @@ import os
 from shapely.geometry import Point
 from toolkit import get_fname, generate_fname_wPath
 
-
+#####
+# TO DO: Move to pipeline
 def SFDATA_file_cleaner_all(input_dir, output_dir, file_name):
     # print('SFDATA_file_cleaner_all:',file_name)
     for fname in file_name:
         SFDATA_file_cleaner(input_dir, output_dir, fname)
-
+#####
 
 def SFDATA_file_cleaner(input_dir, output_dir, file_name):
     """Reads in SFData GPS/AVL speed data and formats them into proper csv files
@@ -148,20 +149,17 @@ def aggregate_to_region(input_path, output_path):
         print('finished %s' % (fname))
 
 
-
-def generate_fname_wPath(DIR, region_id, attr =False):
+def generate_fname_w_path(DIR, region_id, attr=False):
     """Generate file name with whole path"""
 
-#     # avoid file name with "'"
-#     if "'" in attr:
-#         attr = attr.replace("'", "_")
-    fname_wPath = '%s/%s_%s.csv'%(DIR,attr,region_id)
-    return fname_wPath
+    fname_w_path = '%s/%s_%s.csv'%(DIR,attr,region_id)
+    return fname_w_path
 
 
+# TO DO: FIll 0's with column means
 def normalize(df, with_std=False):
     # fill na
-    df = df.fillna(0)
+    df = df.fillna(df.mean())
     print(df.columns)
 
     # scale data. output: ndarray
@@ -174,7 +172,7 @@ def normalize(df, with_std=False):
     return df_scale
 
 
-def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', with_std=False,outdir='',outfname = False):
+def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', with_std=False, outdir='', outfname = False):
     """take a directory of user files into a frequency level time series.(mean)
     Actually it now returns a pandas series, which is the input of 'def predict_time_series_ARIMA function()'
 
