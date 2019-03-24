@@ -1,7 +1,7 @@
 import os
 from utils.formatter import SFDATA_file_cleaner_all, coordinate_mapper_all, aggregate_to_region
 from utils.toolkit import get_fname, check_dir_exist
-from utils.generator import region_by_time_generator
+from utils.traffic_processing import region_by_time_generator
 from utils.arima import predict_time_series_ARIMA
 
 """
