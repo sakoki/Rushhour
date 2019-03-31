@@ -1,8 +1,4 @@
-import pandas as pd
-from utils.toolkit import get_fname
 from sklearn.preprocessing import StandardScaler
-import re
-
 import geopandas as gpd
 import pandas as pd
 import re
