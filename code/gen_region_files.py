@@ -1,5 +1,6 @@
 import os
-from utils.formatter import SFDATA_file_cleaner_all, coordinate_mapper_all, aggregate_to_region
+import geopandas as gpd
+from utils.traffic_processing import SFDATA_file_cleaner, coordinate_mapper, aggregate_to_region
 from utils.toolkit import get_fname, check_dir_exist
 from utils.traffic_processing import region_by_time_generator
 from utils.arima import predict_time_series_ARIMA
@@ -104,7 +105,32 @@ def main():
         Out_ts_path_fname = False
     return Out_ts_path_fname
 
+#####
+# TO DO: Move to pipeline
+def SFDATA_file_cleaner_all(input_dir, output_dir, file_name):
+    # print('SFDATA_file_cleaner_all:',file_name)
+    for fname in file_name:
+        SFDATA_file_cleaner(input_dir, output_dir, fname)
+#####
 
+####
+# TO DO: move out of utils folder, move to pipeline since all it is only wrapping the function in a for-loop
+def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=list(range(0, 6))):
+    """
+
+    :param str shp_file: location of GIS boundary shape file
+    :param input_dir:
+    :param output_dir:
+    :param str file_name: list name of file
+
+    :return:
+    """
+    # census_zone = shp_file
+    # uncomment if we want to accept location of shape file #
+    census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
+    for fname in file_name:
+        coordinate_mapper(census_zone, input_dir, output_dir, fname, columns=list(range(0, 6)))
+####
 if __name__ =="__main__":
     # Out_ts_path_fname = main()
     # clean_output_dir = cleaning_step(INPUT_DIR, OUTPUT_DIR)

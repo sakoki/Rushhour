@@ -1,5 +1,5 @@
 import pandas as pd
-from utils.toolkit import get_fname
+from utils.toolkit import get_fname,generate_fname_wPath
 from sklearn.preprocessing import StandardScaler
 import re
 
@@ -8,15 +8,9 @@ import pandas as pd
 import re
 import os
 from shapely.geometry import Point
-from toolkit import get_fname, generate_fname_wPath
 
-#####
-# TO DO: Move to pipeline
-def SFDATA_file_cleaner_all(input_dir, output_dir, file_name):
-    # print('SFDATA_file_cleaner_all:',file_name)
-    for fname in file_name:
-        SFDATA_file_cleaner(input_dir, output_dir, fname)
-#####
+
+
 
 def SFDATA_file_cleaner(input_dir, output_dir, file_name):
     """Reads in SFData GPS/AVL speed data and formats them into proper csv files
@@ -60,24 +54,7 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
 
     print('{} cleaned'.format(file_name))
 
-####
-# TO DO: move out of utils folder, move to pipeline since all it is only wrapping the function in a for-loop
-def coordinate_mapper_all(shp_file, input_dir, output_dir, file_name, columns=list(range(0, 6))):
-    """
 
-    :param str shp_file: location of GIS boundary shape file
-    :param input_dir:
-    :param output_dir:
-    :param str file_name: list name of file
-
-    :return:
-    """
-    # census_zone = shp_file
-    # uncomment if we want to accept location of shape file #
-    census_zone = gpd.GeoDataFrame.from_file(shp_file)[['geoid10', 'geometry']]
-    for fname in file_name:
-        coordinate_mapper(census_zone, input_dir, output_dir, fname, columns=list(range(0, 6)))
-####
 
 def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(range(0, 6))):
     """Accepts lat, lon coordinates and maps it to corresponding census polygon
