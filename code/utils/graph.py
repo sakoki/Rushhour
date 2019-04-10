@@ -46,7 +46,7 @@ def create_graph(gis_df):
     return G
 
 
-def n_nearest_neighbors(graph, attr):
+def n_nearest_neighbors(G,node_id):
     """Accepts a graph and finds the nearest neighbors of a node containing a particular attribute
 
     For this function, the graph is a representation of the GIS census zones.

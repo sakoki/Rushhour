@@ -11,7 +11,7 @@ _Created on : 2/18/2019 Updated on:2/23/2019_
         |- generator.py
     |- models
         |- ARIMA_baseline.py
-        |- LSTM_baseline.py
+        |- LSTM_baseline.py (Run this file under Rushhour/)
     |- playground
         |- crawling_sfmta_data.ipynb
         |- exploratory.ipynb
@@ -22,7 +22,7 @@ _Created on : 2/18/2019 Updated on:2/23/2019_
         |- region_mapper.ipynb
         |- sfmta_data_analysis.ipynb
     |- scraping_sfmta.py
-    |- gen_region_files.py
+    |- gen_region_files.py (Run this file under Rushhour/)
 
 ## Explanations of directory structures:
 - Files in playground dir are exploratory codes in a format of ipynb(jupyter notebook).
