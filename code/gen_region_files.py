@@ -67,6 +67,7 @@ def sample_time_series_(region_output_dir,OUTPUT_DIR,Out_ts_path_fname):
     # 4. sample_time_series = region_by_time_generator(region_dir,columns=['REPORT_TIME'],Y = 'SPEED',unit = 'H')
     '''
     sample_time_series = region_by_time_generator(region_output_dir,columns=['REPORT_TIME'],Y = 'SPEED',unit = 'H',outdir = OUTPUT_DIR, outfname=Out_ts_path_fname)
+    sample_time_series = normalize(sample_time_series, with_std=False)
     return sample_time_series
 # '''
 # # 5. conduct arima baseline
