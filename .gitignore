@@ -4,3 +4,7 @@
 */.ipynb_checkpoints/*
 .idea/*
 code/playground/.ipynb_checkpoints/
+code/.DS_Store
+.DS_Store
+code/utils/__pycache__/__init__.cpython-36.pyc code/utils/__pycache__/decorators.cpython-36.pyc code/utils/__pycache__/formatter.cpython-36.pyc code/utils/__pycache__/graph.cpython-36.pyc code/utils/__pycache__/toolkit.cpython-36.pyc code/utils/__pycache__/traffic_processing.cpython-36.pyc code/utils/__pycache__/twitter_api.cpython-36.pyc
+.ipynb_checkpoints
