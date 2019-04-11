@@ -12,8 +12,8 @@ code/utils/__pycache__/__init__.cpython-36.pyc code/utils/__pycache__/api.cpytho
 code/utils/__pycache__/api.cpython-36.pyc
 code/utils/__pycache__/decorators.cpython-36.pyc
 code/utils/__pycache__/toolkit.cpython-36.pyc
-code/utils/__pycache__
+code/utils/__pycache__/*
 code/.idea/
-temp_data/
+/temp_data/*
 code/utils/twitter_api.py
-output/High_traffic_zone.png output/all_region_speed_by_vehicle_type.png output/census.adjlist output/census.gpickle output/census_map.png output/region6075012800.png output/region6075047801.png output/region6075990100.png output/region_by_time_series.csv
+/output/*
