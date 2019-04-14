@@ -11,3 +11,7 @@ code/utils/.DS_Store
 code/utils/__pycache__/*
 code/.idea/
 code/utils/twitter_api.py
+output/census.adjlist
+temp_data/all_speeds_feb_2016.csv
+/temp_data/
+/images/
