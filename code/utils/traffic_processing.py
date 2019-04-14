@@ -168,54 +168,94 @@ def normalize(df, with_std=False):
     return df_scale
 
 
-def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', with_std=False, outdir='', outfname = False):
-    """take a directory of user files into a frequency level time series.(mean)
-    Actually it now returns a pandas series, which is the input of 'def predict_time_series_ARIMA function()'
+def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', usecols=None):
+    """Takes all regional time series data from a directory and aggregates them into one time series at desired time frequency
 
-    Inputs:
-    :param path: the output file dir of 'def aggregate_to_region()'
-    :param columns: the list column name string that need to convert to date
-    :param  Y: a string of one column that need to be treated as Y
-    :param unit: time granularity. eg, 'H'
-    :param aggregate_func: a function name, specifies how to aggragate data points.
+    Where the resulting DataFrame will contain the following columns:
+    +-----------+----+----+-----+----+
+    | region_ID | T1 | T2 | ... | TN |
+    +-----------+----+----+-----+----+
 
-    Output:
-    :return: new_time_df.iloc[0]: a pandaframe with time as column,
-                         mean(or other aggregate_func()) speed within one hour(or other time granularity) as data.
+    Each element in the columns T1...TN will be the averaged speed of all speeds recorded in a region at a specific time point.
+
+    :param str path: input directory containing files of interest
+    :param list columns: name of column to be converted to datetime
+    :param str Y: name of column to be treated as the Y
+    :param unit: specification of time granularity
+    :param list usecols: specification of columns to read
+    :return: formatted table
+    :rtype: DataFrame
     """
-    print('begin create_time_df')
-    f_names = get_fname(path,contains='')
+
+    print("Reading files from directory: {}".format(path))
+    file_names = get_fname(path, contains='')
     new_time_df = pd.DataFrame()
-    for file_name in f_names:
-        data_user = pd.read_csv(path + file_name, parse_dates=columns)
-        #         df_user = convert_date(data_user,columns=columns)
-        data_user.index = data_user[columns[0]]
-        df_user = data_user
-        # select the column that is the Y
-        # col_inf = [i for i in df_user.columns if Y in i][0]
-        col_inf = Y
+
+    for name in file_names:
+        region_data = pd.read_csv(path + name, parse_dates=columns, infer_datetime_format=True, usecols=usecols)
+        region_data.index = region_data[columns[0]]
 
         # group second data into one time unit.
-        unitly_aggr = df_user[col_inf].resample(unit).mean()
-        # unitly_aggr.plot(style = [':','--','-'])
+        unit_aggregate = region_data[Y].resample(unit).mean()
+
         # turn a series of data into a row(with dataframe type).
-        weekly_transposed = unitly_aggr.to_frame(name=re.sub("time_series_|\.csv", "", file_name))
-        weekly_transposed = weekly_transposed.transpose()
+        unit_aggregate = unit_aggregate.to_frame(name=re.sub("filtered_|time_series_|\.csv", "", name))
+        unit_aggregate = unit_aggregate.transpose()
 
         # add into final result
-        new_time_df = pd.concat([new_time_df, weekly_transposed])
+        new_time_df = pd.concat([new_time_df, unit_aggregate])
 
-    print('finish create_time_df')
-    print('df shape:',new_time_df.shape)
-    # normalize the data frame
-    new_time_df_new = normalize(new_time_df,with_std = with_std)
-    if outfname:
+    return new_time_df
 
-        new_time_df_new .to_csv(outdir+outfname, index=True)
-        print('successfully output csv file')
+##### To Discuss: Replace buttom with top
+# def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', with_std=False, outdir='', outfname = False):
+#     """take a directory of user files into a frequency level time series.(mean)
+#     Actually it now returns a pandas series, which is the input of 'def predict_time_series_ARIMA function()'
+
+#     Inputs:
+#     :param path: the output file dir of 'def aggregate_to_region()'
+#     :param columns: the list column name string that need to convert to date
+#     :param  Y: a string of one column that need to be treated as Y
+#     :param unit: time granularity. eg, 'H'
+#     :param aggregate_func: a function name, specifies how to aggragate data points.
+
+#     Output:
+#     :return: new_time_df.iloc[0]: a pandaframe with time as column,
+#                          mean(or other aggregate_func()) speed within one hour(or other time granularity) as data.
+#     """
+#     print('begin create_time_df')
+#     f_names = get_fname(path,contains='')
+#     new_time_df = pd.DataFrame()
+#     for file_name in f_names:
+#         data_user = pd.read_csv(path + file_name, parse_dates=columns)
+#         #         df_user = convert_date(data_user,columns=columns)
+#         data_user.index = data_user[columns[0]]
+#         df_user = data_user
+#         # select the column that is the Y
+#         # col_inf = [i for i in df_user.columns if Y in i][0]
+#         col_inf = Y
+
+#         # group second data into one time unit.
+#         unitly_aggr = df_user[col_inf].resample(unit).mean()
+#         # unitly_aggr.plot(style = [':','--','-'])
+#         # turn a series of data into a row(with dataframe type).
+#         weekly_transposed = unitly_aggr.to_frame(name=re.sub("time_series_|\.csv", "", file_name))
+#         weekly_transposed = weekly_transposed.transpose()
+
+#         # add into final result
+#         new_time_df = pd.concat([new_time_df, weekly_transposed])
+
+#     print('finish create_time_df')
+#     print('df shape:',new_time_df.shape)
+#     # normalize the data frame
+#     new_time_df_new = normalize(new_time_df,with_std = with_std)
+#     if outfname:
+
+#         new_time_df_new .to_csv(outdir+outfname, index=True)
+#         print('successfully output csv file')
 
 
-    return new_time_df_new
+#     return new_time_df_new
 
 
 def prediction_table_generator(data, N):

@@ -37,3 +37,13 @@ def get_sfmta_data(base_url, local_dir):
 # Uncomment to run directly in
 # get_sfmta_data('ftp://avl-data.sfmta.com/avl_data/avl_raw/', '../../raw_data/sf_speed_data/')
 
+def get_distance(start, stop):
+    """Find the distance between two locations via Google distance matrix API
+
+    :param start: starting location
+    :param stop: ending location
+    :return: distance between the two locations in meters
+    :rtype: float
+    """
+    pass
+
