@@ -67,16 +67,23 @@ if __name__=="__main__":
 
     new_time_df_new = pd.read_csv(output_root+'/output/'+file_name, index_col = 0)
 
-    rmse_list, mae_list = [], []
-
+    rmse_list, mae_list =[], []
+    region_id_list = []
+    #TODO: debug
+    i=0
     for region_id, row in new_time_df_new.iterrows():
         rmse, mae = predict_time_series_ARIMA(row, title=region_id,fig_size=None, split_size=0.7, full=None)
+        region_id_list.append(region_id)
         rmse_list.append(rmse)
         mae_list.append(mae)
 
+        if i == 2:
+            break
+        i += 1
+
 
     # weighted mae, weighted rmse
-    weighted_rmse, weighted_mae  = weighted_avg(criteria_scores = [rmse_list, mae_list])
+    weighted_rmse, weighted_mae  = weighted_avg(criteria_scores = [rmse_list, mae_list],region_list=region_id_list)
 
     print('weighted_rmse:%s\nweighted_mae:%s'%(weighted_rmse,weighted_mae))
 
