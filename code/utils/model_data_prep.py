@@ -19,7 +19,7 @@ def normalize(df, with_std=False):
 
     return df_scale
 
-def weighted_avg(criteria_scores, debug=None):
+def weighted_avg(criteria_scores,region_list, debug=None):
     """
     for the purpose of evaluating one model one region model(ARIMA/LSTM)
     :param criteria_scores: a list of list of mae/mse/etc scores.
@@ -28,12 +28,16 @@ def weighted_avg(criteria_scores, debug=None):
 
     # weighted average
     weights = load_pickle("region_weights.p", path='output/')
-    pprint.pprint(weights)
-    weight_list = list(weights.values())
+
+
+    # get ordered subset of weight value
+    weight_list = [weights[k] for k in region_list if k in weights]
+
 
     if debug:
         weight_list = list(weights.values())[: debug]
 
+    pprint.pprint(weight_list)
     weighted_scores = []
     for score_list in criteria_scores:
         weighted_scores.append(np.average(score_list, weights=weight_list))

@@ -76,7 +76,7 @@ def plot_lstm(history):
 
     print(history.history.keys())
 
-    # np.sqrt("Loss"_ = rmse
+    # np.sqrt("Loss") = rmse
     rmse = np.sqrt(history.history['loss'])
     val_rmse = np.sqrt(history.history['val_loss'])
     plt.plot(rmse)
