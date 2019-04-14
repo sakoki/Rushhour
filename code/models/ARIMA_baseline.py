@@ -69,17 +69,13 @@ if __name__=="__main__":
 
     rmse_list, mae_list =[], []
     region_id_list = []
-    #TODO: debug
-    i=0
+
     for region_id, row in new_time_df_new.iterrows():
         rmse, mae = predict_time_series_ARIMA(row, title=region_id,fig_size=None, split_size=0.7, full=None)
         region_id_list.append(region_id)
         rmse_list.append(rmse)
         mae_list.append(mae)
 
-        if i == 2:
-            break
-        i += 1
 
 
     # weighted mae, weighted rmse
