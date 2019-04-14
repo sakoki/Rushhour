@@ -5,12 +5,12 @@ from statsmodels.tsa.arima_model import ARIMA
 import numpy as np
 import os,sys
 import pandas as pd
-import pprint
 
 sys.path.insert(0,os.getcwd()+'/code/utils/')
 
 # own functions
-from toolkit import load_pickle
+
+from model_data_prep import weighted_avg
 
 # from code snippet: https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/
 def predict_time_series_ARIMA(mean_series, title=None, fig_size=(20, 10), split_size=0.25, full=False):
@@ -75,17 +75,9 @@ if __name__=="__main__":
         mae_list.append(mae)
 
 
+    # weighted mae, weighted rmse
+    weighted_rmse, weighted_mae  = weighted_avg(criteria_scores = [rmse_list, mae_list])
 
-    # weighted average
-    weights = load_pickle("region_weights.p",path = 'output/')
-    pprint.pprint(weights)
-    weight_list = list(weights.values())
-
-
-    # weighted mae
-    weighted_mae = np.average(mae_list,weights = weight_list)
-    #weighted rmse
-    weighted_rmse = np.average(rmse_list, weights=weight_list)
     print('weighted_rmse:%s\nweighted_mae:%s'%(weighted_rmse,weighted_mae))
 
     # plt.plot(rmse_list)
