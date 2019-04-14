@@ -83,6 +83,7 @@ def plot_lstm(history):
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
+    plt.savefig('output/lstm_loss.png')
     plt.show()
 
     # "MAE"
@@ -92,12 +93,13 @@ def plot_lstm(history):
     plt.ylabel('MAE')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
+    plt.savefig('output/lstm_mae.png')
     plt.show()
 
 if __name__ =="__main__":
     file_name = sys.argv[1] # 'region_by_time_series.csv'
     output_root = os.getcwd()
 
-    new_time_df_new = pd.read_csv(output_root+'/output/'+file_name)
+    new_time_df_new = pd.read_csv(output_root+'/output/'+file_name, index_col = 0)
     history = LSTM_base(new_time_df_new)
     plot_lstm(history)
