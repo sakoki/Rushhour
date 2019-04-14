@@ -10,7 +10,6 @@ import sys # for import local function
 sys.path.insert(0,os.getcwd()+'/code/utils/')
 
 
-
 from toolkit import get_fname, generate_fname_wPath
 
 
@@ -153,14 +152,16 @@ def normalize(df, with_std=False):
 
 
 def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', usecols=None):
-    """Takes all regional time series data from a directory and aggregates them into one time series at desired time frequency
+    """Takes all regional time series data from a directory and aggregates them into one time series at desired time
+    frequency
 
     Where the resulting DataFrame will contain the following columns:
     +-----------+----+----+-----+----+
     | region_ID | T1 | T2 | ... | TN |
     +-----------+----+----+-----+----+
 
-    Each element in the columns T1...TN will be the averaged speed of all speeds recorded in a region at a specific time point.
+    Each element in the columns T1...TN will be the averaged speed of all speeds recorded in a region at a specific time
+    point.
 
     :param str path: input directory containing files of interest
     :param list columns: name of column to be converted to datetime
