@@ -65,22 +65,24 @@ def LSTM_base(new_time_df_new):
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
     history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=16, verbose=2)
     predict_speed = model.predict(X_test)
-    lstm_mse = mean_squared_error(Y_test, predict_speed)
+    lstm_rmse = np.sqrt(mean_squared_error(Y_test, predict_speed))
     lstm_mae = mean_absolute_error(Y_test, predict_speed)
-    print('Test RMSE: %.3f' % np.sqrt(lstm_mse))
+    print('Test RMSE: %.3f' % lstm_rmse)
     print('Test MAE: %.3f' % lstm_mae)
-    return history
+    return history, lstm_rmse,lstm_mae
 
 def plot_lstm(history):
 
 
     print(history.history.keys())
 
-    # "Loss"
-    plt.plot(history.history['loss'])
-    plt.plot(history.history['val_loss'])
-    plt.title('model loss')
-    plt.ylabel('loss')
+    # np.sqrt("Loss"_ = rmse
+    rmse = np.sqrt(history.history['loss'])
+    val_rmse = np.sqrt(history.history['val_loss'])
+    plt.plot(rmse)
+    plt.plot(val_rmse)
+    plt.title('model RMSE')
+    plt.ylabel('rmse')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
     plt.savefig('output/lstm_loss.png')
@@ -97,7 +99,7 @@ def plot_lstm(history):
     plt.show()
 
 if __name__ =="__main__":
-    file_name = sys.argv[1] # 'region_by_time_series.csv'
+    file_name = sys.argv[1] # 'region_time_series_filtered.csv'
     output_root = os.getcwd()
 
     new_time_df_new = pd.read_csv(output_root+'/output/'+file_name, index_col = 0)
