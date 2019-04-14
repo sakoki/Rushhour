@@ -128,13 +128,6 @@ def aggregate_to_region(input_path, output_path):
         print('finished %s' % (fname))
 
 
-def generate_fname_w_path(DIR, region_id, attr=False):
-    """Generate file name with whole path"""
-
-    fname_w_path = '%s/%s_%s.csv'%(DIR,attr,region_id)
-    return fname_w_path
-
-
 # TO DO: FIll 0's with column means
 def normalize(df, with_std=False):
     # fill na
