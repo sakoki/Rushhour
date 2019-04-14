@@ -46,7 +46,25 @@ def create_graph(gis_df):
     return G
 
 
-def n_nearest_neighbors(G,node_id):
+
+def lookup_geoid(graph, geoid):
+    """Look for node with matching geoid
+
+    For this function, the graph is a representation of the GIS census zones.
+    The node of the graph should have the geoid attribute, which is the unique
+    identifier of the census region.
+
+    :param graph: graph representation of census zones
+    :type graph: networkx.classes.graph.Graph
+    :param str geoid: unique attribute of the node
+    :return: return node index in graph
+    :rtype: int
+    """
+    node = [node for node, attr in graph.nodes(data=True) if attr['geoid'] == geoid]
+    return node
+
+
+def n_nearest_neighbors(graph, geoid):
     """Accepts a graph and finds the nearest neighbors of a node containing a particular attribute
 
     For this function, the graph is a representation of the GIS census zones.
@@ -55,14 +73,14 @@ def n_nearest_neighbors(G,node_id):
 
     :param graph: graph representation of census zones
     :type graph: networkx.classes.graph.Graph
-    :param str attr: unique attribute of the node
+    :param str geoid: unique attribute of the node
     :return: list of nearest neighbor node id's
     :rtype: list of int
     """
 
     # get the node number with the corresponding attribute
-    node = [node for node, attr in G.nodes(data=True) if attr['geoid'] == node_id]
+    node = lookup_geoid(graph, geoid)
     assert len(node) == 1, "More than one node have the specified geoid"
-    nearest_nodes = list(G.neighbors(node[0]))
-    neighbors = [G.node[i]['geoid'] for i in nearest_nodes]
+    nearest_nodes = list(graph.neighbors(node[0]))
+    neighbors = [graph.node[i]['geoid'] for i in nearest_nodes]
     return neighbors

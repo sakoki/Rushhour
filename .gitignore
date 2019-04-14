@@ -1,6 +1,5 @@
 /raw_data/*
 !/raw_data/census_zones/sf/*
-/output
 */.ipynb_checkpoints/*
 .idea/*
 code/playground/.ipynb_checkpoints/
@@ -9,10 +8,6 @@ code/playground/.ipynb_checkpoints/
 code/.DS_Store
 code/playground/.DS_Store
 code/utils/.DS_Store
-code/utils/__pycache__/__init__.cpython-36.pyc code/utils/__pycache__/api.cpython-36.pyc code/utils/__pycache__/decorators.cpython-36.pyc code/utils/__pycache__/formatter.cpython-36.pyc code/utils/__pycache__/toolkit.cpython-36.pyc
-code/utils/__pycache__/api.cpython-36.pyc
-code/utils/__pycache__/decorators.cpython-36.pyc
-code/utils/__pycache__/toolkit.cpython-36.pyc
-code/utils/__pycache__
+code/utils/__pycache__/*
 code/.idea/
-temp_data/
+code/utils/twitter_api.py
