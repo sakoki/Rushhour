@@ -1,6 +1,7 @@
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
+from pytz import timezone
 
 
 def time_zone_converter(date, zone):
@@ -19,7 +20,7 @@ def time_zone_converter(date, zone):
     return date.strftime('%Y-%m-%d %H:%M:%S')
 
 
-def tweet_coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns, col_time, col_coords, zone=None):
+def tweet_coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns, col_time, zone=None):
     """Accepts lat, lon coordinates and maps it to corresponding census Polygon
 
     :param DataFrame shp_file: GIS boundary data table
@@ -29,8 +30,6 @@ def tweet_coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns,
     :param columns: name of columns to keep
     :type columns: list of str
     :param str col_time: column containing datetime object
-    :param col_coords: columns containing lon,lat coordinates
-    :type cold_coords: Tuple of (str, str)
     :param str zone: specify the timezone to convert datetime object, default None
     :return: table of tweets mapped to corresponding Polygon
     """
@@ -41,14 +40,14 @@ def tweet_coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns,
                               # date_parser=dateparse,
                               usecols=columns,
                               infer_datetime_format=True)
-    
-    # Match time zone
-    if zone != None:
-        coordinates.loc[:, col_time] = coordinates.apply(lambda row: time_zone_converter(date=row[col_time], zone=zone), axis=1)
-    
 
-    # Convert lat & lon points ot Point geometry shape and create a new geopandas dataframe
-    geom = pd.Series(zip(coordinates['LONGITUDE'], coordinates['LATITUDE'])).apply(Point)
+    # Match time zone to specific timezone
+    if zone != None:
+        coordinates.loc[:, col_time] = coordinates.apply(lambda row: time_zone_converter(date=row[col_time],
+                                                                                         zone=zone), axis=1)
+
+    # Convert lat & lon points ot Point geometry shape and create a new geopandas DataFrame
+    geom = pd.Series(zip(coordinates['lon'], coordinates['lat'])).apply(Point)
     coordinates = gpd.GeoDataFrame(coordinates, geometry=geom)
 
     # Check crs of two dataframe match before merging
@@ -56,6 +55,9 @@ def tweet_coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns,
 
     # Specify operation(op) to 'within' to map points that are within polygons
     mapped_coordinates = gpd.sjoin(coordinates, shp_file, op='within')
+
+    print("Mapping completed. Size before: {}, Size after: {}".format(coordinates.shape[0],
+                                                                      mapped_coordinates.shape[0]))
 
     mapped_coordinates.to_csv(output_dir + 'mapped_' + file_name, index=False)
 

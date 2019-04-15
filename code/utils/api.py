@@ -1,6 +1,8 @@
 import requests
 import requests_ftp
 import re
+import urllib
+from secret import APP_ID, APP_CODE
 
 
 def get_sfmta_data(base_url, local_dir):
@@ -34,6 +36,47 @@ def get_sfmta_data(base_url, local_dir):
 
     return list_names
 
+
+def reverse_geocode(lon, lat, location='address'):
+    """Reverse geocode lon and lat coordinates using the Geocoder API
+
+    The following API is used
+    https://developer.here.com/api-explorer/rest/geocoder/reverse-geocode
+
+    :param flaot lon: longitude coordinate
+    :param float lat: latitude coordinate
+    :param str location: specify country, state, or address (default address)
+    ;return: specified information about location
+    :rtype: str
+    """
+
+    # Encode parameters
+    coordinates = str(lat) + ',' + str(lon)
+    params = urllib.parse.urlencode({'prox': coordinates,
+                                     'mode': 'retrieveAddresses',
+                                     'maxresults': 1,
+                                     'gen': 9,
+                                     'app_id': APP_ID,
+                                     'app_code': APP_CODE,
+                                     })
+
+    # Contruct request URL
+    # url = 'https://geo.fcc.gov/api/census/area?' + params
+    url = 'https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?' + params
+
+    # Get response from API
+    response = requests.get(url)
+
+    # Parse json in response
+    data = response.json()
+
+    if location == 'country':
+        return data["Response"]["View"][0]["Result"][0]["Location"]["Address"]["Country"]
+    elif location == 'state':
+        return data["Response"]["View"][0]["Result"][0]["Location"]["Address"]["State"]
+    return data["Response"]["View"][0]["Result"][0]["Location"]["Address"]['Label']
+
+
 # Uncomment to run directly in
 # get_sfmta_data('ftp://avl-data.sfmta.com/avl_data/avl_raw/', '../../raw_data/sf_speed_data/')
 
@@ -46,4 +89,5 @@ def get_distance(start, stop):
     :rtype: float
     """
     pass
+
 
