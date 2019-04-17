@@ -4,7 +4,7 @@ sys.path.insert(0,os.getcwd()+'/code/utils/')
 
 # own functions
 
-from model_data_prep import data_prepare_lstm,LSTM_base,plot_lstm
+from model_data_prep import data_prepare_lstm,LSTM_base,plot_lstm,weighted_avg
 
 
 import networkx as nx
@@ -30,8 +30,6 @@ def average_nb_ts(sample_time_series):
         nbs_df = pd.concat([nbs_df,nb_mean])
     nbs_df = nbs_df.set_index(sample_time_series.index)
     return nbs_df
-
-
 if __name__ =="__main__":
     split_size = 0.7
     sliding_window = 12
@@ -44,15 +42,32 @@ if __name__ =="__main__":
     # print('finish generate neighbor df')
     nbs_df= pd.read_csv('output/neighbor_ts.csv',index_col=0)
 
-    # generate target time series train data
-    x_train, y_train, X_test, Y_test = data_prepare_lstm(new_time_df_new, split_size=split_size, time_window=sliding_window)
-    x_train_nb, _, X_test_nb, _ = data_prepare_lstm(nbs_df, split_size=split_size, time_window=sliding_window)
+    rmse_list, mae_list =[], []
+    region_id_list = []
 
-    x_train_agg = np.concatenate((x_train, x_train_nb), axis=1)
-    y_train_agg = y_train
-    X_test_agg = np.concatenate((X_test, X_test_nb), axis=1)
-    Y_test_agg = Y_test
+    for region_id, row in new_time_df_new.iterrows():
+        # targeted region data
+        tmp_df = row.to_frame().T
+        x_train, y_train, X_test, Y_test = data_prepare_lstm(tmp_df, split_size=split_size,
+                                                             time_window=sliding_window)
 
-    print(x_train_agg.shape)
-    history, lstm_rmse,lstm_mae = LSTM_base(x_train_agg, y_train_agg, X_test_agg, Y_test_agg, epoch=8)
-    plot_lstm(history,attr='_nb')
+        #neighbor data
+        tmp_df_nb = nbs_df.loc[region_id].to_frame().T
+        x_train_nb, _, X_test_nb, _ = data_prepare_lstm(tmp_df_nb, split_size=split_size, time_window=sliding_window)
+
+        # concat together
+        x_train_agg = np.concatenate((x_train, x_train_nb), axis=1)
+        y_train_agg = y_train
+        X_test_agg = np.concatenate((X_test, X_test_nb), axis=1)
+        Y_test_agg = Y_test
+
+        _, rmse, mae = LSTM_base(x_train_agg, y_train_agg, X_test_agg, Y_test_agg, epoch=8)
+        region_id_list.append(region_id)
+        rmse_list.append(rmse)
+        mae_list.append(mae)
+        break
+
+    # weighted mae, weighted rmse
+    weighted_rmse, weighted_mae  = weighted_avg(criteria_scores = [rmse_list, mae_list],region_list=region_id_list)
+
+    print('weighted_rmse:%s\nweighted_mae:%s'%(weighted_rmse,weighted_mae))
