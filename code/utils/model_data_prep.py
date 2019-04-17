@@ -11,7 +11,7 @@ import os,sys
 sys.path.insert(0,os.getcwd()+'/code/utils/')
 from toolkit import load_pickle
 
-def LSTM_base(new_time_df_new,split_size = 0.7, time_window = 12, epoch = 20):
+def data_prepare_lstm(new_time_df_new,split_size = 0.7, time_window = 12):
     ## code snippet: https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/
 
     # creating dataframe
@@ -56,14 +56,16 @@ def LSTM_base(new_time_df_new,split_size = 0.7, time_window = 12, epoch = 20):
         X_test = np.concatenate((X_test, sub_X_test), axis=0)
         Y_test = np.concatenate((Y_test, sub_Y_test), axis=0)
 
-    print(x_train.shape)
+    return x_train, y_train, X_test, Y_test
+
+def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20):
 
     # create and fit the LSTM network
     model = Sequential()
     model.add(LSTM(units=16, return_sequences=True, input_shape=(x_train.shape[1], 1)))
     model.add(LSTM(units=16))
     model.add(Dense(1))
-
+    print
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
     history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=16, verbose=2)
     predict_speed = model.predict(X_test)
@@ -73,7 +75,7 @@ def LSTM_base(new_time_df_new,split_size = 0.7, time_window = 12, epoch = 20):
     print('Test MAE: %.3f' % lstm_mae)
     return history, lstm_rmse,lstm_mae
 
-def plot_lstm(history):
+def plot_lstm(history,attr = ''):
 
 
     print(history.history.keys())
@@ -87,7 +89,7 @@ def plot_lstm(history):
     plt.ylabel('rmse')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig('output/lstm_loss.png')
+    plt.savefig('output/lstm_loss%s.png'%(attr))
     plt.show()
 
     # "MAE"
@@ -97,7 +99,7 @@ def plot_lstm(history):
     plt.ylabel('MAE')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig('output/lstm_mae.png')
+    plt.savefig('output/lstm_mae%s.png'%(attr))
     plt.show()
 
 def normalize(df, with_std=False):
