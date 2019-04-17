@@ -1,0 +1,783 @@
+Region id: region_6075010100
+Test RMSE: 0.616
+Test MAE: 0.296
+Region id: region_6075010200
+Test RMSE: 0.895
+Test MAE: 0.552
+Region id: region_6075010300
+Test RMSE: 1.066
+Test MAE: 0.699
+Region id: region_6075010400
+Test RMSE: 1.243
+Test MAE: 0.959
+Region id: region_6075010500
+Test RMSE: 1.026
+Test MAE: 0.751
+Region id: region_6075010600
+Test RMSE: 1.028
+Test MAE: 0.742
+Region id: region_6075010700
+Test RMSE: 0.855
+Test MAE: 0.481
+Region id: region_6075010800
+Test RMSE: 0.516
+Test MAE: 0.191
+Region id: region_6075010900
+Test RMSE: 1.013
+Test MAE: 0.669
+Region id: region_6075011000
+Test RMSE: 1.027
+Test MAE: 0.709
+Region id: region_6075011100
+Test RMSE: 0.998
+Test MAE: 0.670
+Region id: region_6075011200
+Test RMSE: 0.898
+Test MAE: 0.553
+Region id: region_6075011300
+Test RMSE: 0.796
+Test MAE: 0.449
+Region id: region_6075011700
+Test RMSE: 0.873
+Test MAE: 0.536
+Region id: region_6075011800
+Test RMSE: 1.084
+Test MAE: 0.789
+Region id: region_6075011901
+Test RMSE: 1.573
+Test MAE: 1.770
+Region id: region_6075011902
+Test RMSE: 1.354
+Test MAE: 1.237
+Region id: region_6075012000
+Test RMSE: 1.150
+Test MAE: 0.861
+Region id: region_6075012100
+Test RMSE: 1.113
+Test MAE: 0.778
+Region id: region_6075012201
+Test RMSE: 0.900
+Test MAE: 0.558
+Region id: region_6075012202
+Test RMSE: 0.766
+Test MAE: 0.441
+Region id: region_6075012301
+Test RMSE: 0.589
+Test MAE: 0.271
+Region id: region_6075012302
+Test RMSE: 0.818
+Test MAE: 0.478
+Region id: region_6075012401
+Test RMSE: 1.186
+Test MAE: 0.941
+Region id: region_6075012402
+Test RMSE: 0.851
+Test MAE: 0.528
+Region id: region_6075012501
+Test RMSE: 1.119
+Test MAE: 0.844
+Region id: region_6075012502
+Test RMSE: 1.365
+Test MAE: 1.233
+Region id: region_6075012601
+Test RMSE: 1.192
+Test MAE: 0.992
+Region id: region_6075012602
+Test RMSE: 0.995
+Test MAE: 0.652
+Region id: region_6075012700
+Test RMSE: 1.424
+Test MAE: 1.340
+Region id: region_6075012800
+Test RMSE: 0.800
+Test MAE: 0.452
+Region id: region_6075012901
+Test RMSE: 0.909
+Test MAE: 0.617
+Region id: region_6075012902
+Test RMSE: 0.819
+Test MAE: 0.540
+Region id: region_6075013000
+Test RMSE: 0.804
+Test MAE: 0.467
+Region id: region_6075013101
+Test RMSE: 1.194
+Test MAE: 0.925
+Region id: region_6075013102
+Test RMSE: 1.285
+Test MAE: 0.990
+Region id: region_6075013200
+Test RMSE: 0.820
+Test MAE: 0.518
+Region id: region_6075013300
+Test RMSE: 1.167
+Test MAE: 0.910
+Region id: region_6075013400
+Test RMSE: 1.374
+Test MAE: 1.055
+Region id: region_6075013500
+Test RMSE: 0.666
+Test MAE: 0.346
+Region id: region_6075015100
+Test RMSE: 0.861
+Test MAE: 0.494
+Region id: region_6075015200
+Test RMSE: 0.976
+Test MAE: 0.754
+Region id: region_6075015300
+Test RMSE: 1.111
+Test MAE: 0.911
+Region id: region_6075015400
+Test RMSE: 0.676
+Test MAE: 0.300
+Region id: region_6075015500
+Test RMSE: 0.891
+Test MAE: 0.570
+Region id: region_6075015600
+Test RMSE: 0.852
+Test MAE: 0.515
+Region id: region_6075015700
+Test RMSE: 0.831
+Test MAE: 0.472
+Region id: region_6075015801
+Test RMSE: 0.825
+Test MAE: 0.505
+Region id: region_6075015802
+Test RMSE: 0.674
+Test MAE: 0.345
+Region id: region_6075015900
+Test RMSE: 0.874
+Test MAE: 0.554
+Region id: region_6075016000
+Test RMSE: 0.905
+Test MAE: 0.577
+Region id: region_6075016100
+Test RMSE: 0.772
+Test MAE: 0.444
+Region id: region_6075016200
+Test RMSE: 1.064
+Test MAE: 0.777
+Region id: region_6075016300
+Test RMSE: 0.807
+Test MAE: 0.505
+Region id: region_6075016400
+Test RMSE: 0.981
+Test MAE: 0.697
+Region id: region_6075016500
+Test RMSE: 1.097
+Test MAE: 0.715
+Region id: region_6075016600
+Test RMSE: 0.836
+Test MAE: 0.495
+Region id: region_6075016700
+Test RMSE: 0.740
+Test MAE: 0.409
+Region id: region_6075016801
+Test RMSE: 0.914
+Test MAE: 0.557
+Region id: region_6075016802
+Test RMSE: 1.138
+Test MAE: 0.919
+Region id: region_6075016900
+Test RMSE: 1.128
+Test MAE: 0.911
+Region id: region_6075017000
+Test RMSE: 0.821
+Test MAE: 0.503
+Region id: region_6075017101
+Test RMSE: 1.300
+Test MAE: 0.928
+Region id: region_6075017102
+Test RMSE: 0.920
+Test MAE: 0.566
+Region id: region_6075017601
+Test RMSE: 0.737
+Test MAE: 0.394
+Region id: region_6075017700
+Test RMSE: 0.690
+Test MAE: 0.372
+Region id: region_6075017801
+Test RMSE: 1.220
+Test MAE: 1.097
+Region id: region_6075017802
+Test RMSE: 0.940
+Test MAE: 0.637
+Region id: region_6075017902
+Test RMSE: 1.578
+Test MAE: 1.491
+Region id: region_6075018000
+Test RMSE: 1.015
+Test MAE: 0.745
+Region id: region_6075020100
+Test RMSE: 0.809
+Test MAE: 0.505
+Region id: region_6075020200
+Test RMSE: 1.158
+Test MAE: 1.034
+Region id: region_6075020300
+Test RMSE: 0.902
+Test MAE: 0.614
+Region id: region_6075020401
+Test RMSE: 1.126
+Test MAE: 1.000
+Region id: region_6075020402
+Test RMSE: 1.367
+Test MAE: 1.354
+Region id: region_6075020500
+Test RMSE: 0.970
+Test MAE: 0.677
+Region id: region_6075020600
+Test RMSE: 0.953
+Test MAE: 0.570
+Region id: region_6075020700
+Test RMSE: 1.319
+Test MAE: 1.205
+Region id: region_6075020800
+Test RMSE: 0.685
+Test MAE: 0.366
+Region id: region_6075020900
+Test RMSE: 0.702
+Test MAE: 0.359
+Region id: region_6075021000
+Test RMSE: 1.468
+Test MAE: 1.378
+Region id: region_6075021100
+Test RMSE: 0.886
+Test MAE: 0.525
+Region id: region_6075021200
+Test RMSE: 0.914
+Test MAE: 0.580
+Region id: region_6075021300
+Test RMSE: 0.979
+Test MAE: 0.683
+Region id: region_6075021400
+Test RMSE: 0.734
+Test MAE: 0.412
+Region id: region_6075021500
+Test RMSE: 0.863
+Test MAE: 0.514
+Region id: region_6075021600
+Test RMSE: 0.858
+Test MAE: 0.539
+Region id: region_6075021700
+Test RMSE: 1.034
+Test MAE: 0.783
+Region id: region_6075021800
+Test RMSE: 1.034
+Test MAE: 0.801
+Region id: region_6075022600
+Test RMSE: 0.987
+Test MAE: 0.773
+Region id: region_6075022702
+Test RMSE: 1.322
+Test MAE: 1.396
+Region id: region_6075022704
+Test RMSE: 1.603
+Test MAE: 1.893
+Region id: region_6075022801
+Test RMSE: 0.400
+Test MAE: 0.125
+Region id: region_6075022802
+Test RMSE: 1.180
+Test MAE: 1.094
+Region id: region_6075022803
+Test RMSE: 1.448
+Test MAE: 1.264
+Region id: region_6075022901
+Test RMSE: 1.345
+Test MAE: 1.110
+Region id: region_6075022902
+Test RMSE: 1.481
+Test MAE: 1.392
+Region id: region_6075022903
+Test RMSE: 1.226
+Test MAE: 1.065
+Region id: region_6075023001
+Test RMSE: 1.482
+Test MAE: 1.701
+Region id: region_6075023003
+Test RMSE: 1.115
+Test MAE: 0.805
+Region id: region_6075023102
+Test RMSE: 1.376
+Test MAE: 1.074
+Region id: region_6075023103
+Test RMSE: 1.571
+Test MAE: 1.261
+Region id: region_6075023200
+Test RMSE: 0.995
+Test MAE: 0.656
+Region id: region_6075023300
+Test RMSE: 1.187
+Test MAE: 1.019
+Region id: region_6075023400
+Test RMSE: 1.102
+Test MAE: 0.873
+Region id: region_6075025100
+Test RMSE: 1.379
+Test MAE: 1.462
+Region id: region_6075025200
+Test RMSE: 0.819
+Test MAE: 0.496
+Region id: region_6075025300
+Test RMSE: 0.710
+Test MAE: 0.384
+Region id: region_6075025401
+Test RMSE: 0.733
+Test MAE: 0.418
+Region id: region_6075025402
+Test RMSE: 1.007
+Test MAE: 0.696
+Region id: region_6075025403
+Test RMSE: 1.578
+Test MAE: 1.636
+Region id: region_6075025500
+Test RMSE: 1.345
+Test MAE: 1.367
+Region id: region_6075025600
+Test RMSE: 1.536
+Test MAE: 1.683
+Region id: region_6075025701
+Test RMSE: 1.693
+Test MAE: 2.208
+Region id: region_6075025702
+Test RMSE: 1.296
+Test MAE: 1.253
+Region id: region_6075025800
+Test RMSE: 1.167
+Test MAE: 0.974
+Region id: region_6075025900
+Test RMSE: 1.488
+Test MAE: 1.289
+Region id: region_6075026001
+Test RMSE: 0.896
+Test MAE: 0.571
+Region id: region_6075026002
+Test RMSE: 1.183
+Test MAE: 0.933
+Region id: region_6075026003
+Test RMSE: 1.298
+Test MAE: 0.864
+Region id: region_6075026004
+Test RMSE: 1.072
+Test MAE: 0.785
+Region id: region_6075026100
+Test RMSE: 0.602
+Test MAE: 0.278
+Region id: region_6075026200
+Test RMSE: 1.473
+Test MAE: 1.709
+Region id: region_6075026301
+Test RMSE: 0.929
+Test MAE: 0.623
+Region id: region_6075026302
+Test RMSE: 1.177
+Test MAE: 0.990
+Region id: region_6075026303
+Test RMSE: 1.007
+Test MAE: 0.758
+Region id: region_6075026401
+Test RMSE: 0.801
+Test MAE: 0.507
+Region id: region_6075026402
+Test RMSE: 0.985
+Test MAE: 0.708
+Region id: region_6075026403
+Test RMSE: 0.727
+Test MAE: 0.419
+Region id: region_6075026404
+Test RMSE: 1.265
+Test MAE: 1.073
+Region id: region_6075030101
+Test RMSE: 0.790
+Test MAE: 0.416
+Region id: region_6075030102
+Test RMSE: 1.504
+Test MAE: 1.384
+Region id: region_6075030201
+Test RMSE: 0.871
+Test MAE: 0.554
+Region id: region_6075030202
+Test RMSE: 0.836
+Test MAE: 0.462
+Region id: region_6075030301
+Test RMSE: 1.243
+Test MAE: 0.990
+Region id: region_6075030302
+Test RMSE: 1.270
+Test MAE: 1.103
+Region id: region_6075030400
+Test RMSE: 1.113
+Test MAE: 0.862
+Region id: region_6075030500
+Test RMSE: 1.390
+Test MAE: 1.428
+Region id: region_6075030600
+Test RMSE: 0.937
+Test MAE: 0.679
+Region id: region_6075030700
+Test RMSE: 1.605
+Test MAE: 1.575
+Region id: region_6075030800
+Test RMSE: 0.903
+Test MAE: 0.511
+Region id: region_6075030900
+Test RMSE: 0.854
+Test MAE: 0.539
+Region id: region_6075031000
+Test RMSE: 1.199
+Test MAE: 0.909
+Region id: region_6075031100
+Test RMSE: 1.936
+Test MAE: 2.234
+Region id: region_6075031201
+Test RMSE: 0.854
+Test MAE: 0.543
+Region id: region_6075031202
+Test RMSE: 1.358
+Test MAE: 1.316
+Region id: region_6075031301
+Test RMSE: 1.352
+Test MAE: 1.067
+Region id: region_6075031302
+Test RMSE: 1.658
+Test MAE: 1.699
+Region id: region_6075031400
+Test RMSE: 1.654
+Test MAE: 1.531
+Region id: region_6075032601
+Test RMSE: 0.877
+Test MAE: 0.549
+Region id: region_6075032602
+Test RMSE: 0.948
+Test MAE: 0.657
+Region id: region_6075032700
+Test RMSE: 0.876
+Test MAE: 0.560
+Region id: region_6075032801
+Test RMSE: 0.993
+Test MAE: 0.693
+Region id: region_6075032802
+Test RMSE: 1.195
+Test MAE: 1.015
+Region id: region_6075032901
+Test RMSE: 0.964
+Test MAE: 0.684
+Region id: region_6075032902
+Test RMSE: 1.615
+Test MAE: 1.455
+Region id: region_6075033000
+Test RMSE: 1.195
+Test MAE: 0.921
+Region id: region_6075033100
+Test RMSE: 1.116
+Test MAE: 0.936
+Region id: region_6075033201
+Test RMSE: 1.020
+Test MAE: 0.759
+Region id: region_6075033203
+Test RMSE: 1.872
+Test MAE: 2.143
+Region id: region_6075033204
+Test RMSE: 1.577
+Test MAE: 1.638
+Region id: region_6075035100
+Test RMSE: 0.861
+Test MAE: 0.538
+Region id: region_6075035201
+Test RMSE: 1.650
+Test MAE: 1.617
+Region id: region_6075035202
+Test RMSE: 0.969
+Test MAE: 0.696
+Region id: region_6075035300
+Test RMSE: 0.872
+Test MAE: 0.570
+Region id: region_6075035400
+Test RMSE: 0.952
+Test MAE: 0.688
+Region id: region_6075040100
+Test RMSE: 0.967
+Test MAE: 0.698
+Region id: region_6075040200
+Test RMSE: 0.840
+Test MAE: 0.520
+Region id: region_6075042601
+Test RMSE: 0.902
+Test MAE: 0.598
+Region id: region_6075042602
+Test RMSE: 1.048
+Test MAE: 0.777
+Region id: region_6075042700
+Test RMSE: 1.049
+Test MAE: 0.682
+Region id: region_6075042800
+Test RMSE: 1.341
+Test MAE: 1.160
+Region id: region_6075045100
+Test RMSE: 0.908
+Test MAE: 0.547
+Region id: region_6075045200
+Test RMSE: 0.993
+Test MAE: 0.646
+Region id: region_6075047600
+Test RMSE: 0.959
+Test MAE: 0.630
+Region id: region_6075047701
+Test RMSE: 0.911
+Test MAE: 0.572
+Region id: region_6075047702
+Test RMSE: 1.223
+Test MAE: 0.967
+Region id: region_6075047801
+Test RMSE: 1.105
+Test MAE: 0.902
+Region id: region_6075047802
+Test RMSE: 1.051
+Test MAE: 0.758
+Region id: region_6075047901
+Test RMSE: 1.188
+Test MAE: 0.812
+Region id: region_6075047902
+Test RMSE: 0.860
+Test MAE: 0.554
+Region id: region_6075060100
+Test RMSE: 1.168
+Test MAE: 1.045
+Region id: region_6075060400
+Test RMSE: 1.941
+Test MAE: 2.120
+Region id: region_6075060502
+Test RMSE: 0.770
+Test MAE: 0.437
+Region id: region_6075060700
+Test RMSE: 1.060
+Test MAE: 0.822
+Region id: region_6075061000
+Test RMSE: 0.988
+Test MAE: 0.713
+Region id: region_6075061100
+Test RMSE: 1.044
+Test MAE: 0.727
+Region id: region_6075061200
+Test RMSE: 0.865
+Test MAE: 0.566
+Region id: region_6075061400
+Test RMSE: 1.665
+Test MAE: 1.885
+Region id: region_6075061500
+Test RMSE: 0.797
+Test MAE: 0.419
+Region id: region_6075980200
+Test RMSE: 1.160
+Test MAE: 0.948
+Region id: region_6075980300
+Test RMSE: 0.893
+Test MAE: 0.565
+Region id: region_6075980501
+Test RMSE: 1.413
+Test MAE: 1.224
+Region id: region_6075980600
+Test RMSE: 1.286
+Test MAE: 1.210
+Region id: region_6075980900
+Test RMSE: 0.827
+Test MAE: 0.474
+successfully load region_weights.p
+[786051,
+ 330834,
+ 62132,
+ 51990,
+ 432700,
+ 75431,
+ 163160,
+ 403065,
+ 95589,
+ 139189,
+ 123271,
+ 84754,
+ 105743,
+ 871818,
+ 43441,
+ 12766,
+ 40423,
+ 58487,
+ 62847,
+ 47125,
+ 82727,
+ 101329,
+ 82457,
+ 21451,
+ 368140,
+ 283838,
+ 12771,
+ 21675,
+ 80248,
+ 67189,
+ 160404,
+ 65930,
+ 129080,
+ 89890,
+ 51106,
+ 30105,
+ 81223,
+ 139626,
+ 68856,
+ 93542,
+ 93211,
+ 74044,
+ 68270,
+ 1510977,
+ 145615,
+ 81344,
+ 242302,
+ 107787,
+ 57515,
+ 113862,
+ 62632,
+ 107764,
+ 62564,
+ 48208,
+ 46286,
+ 98116,
+ 108565,
+ 106536,
+ 212920,
+ 173180,
+ 165375,
+ 34311,
+ 32960,
+ 101319,
+ 789124,
+ 1083134,
+ 38036,
+ 173543,
+ 85966,
+ 278124,
+ 319194,
+ 83812,
+ 230888,
+ 79471,
+ 63673,
+ 185821,
+ 86504,
+ 12699,
+ 140275,
+ 204775,
+ 15425,
+ 51078,
+ 44091,
+ 33762,
+ 47768,
+ 69594,
+ 40111,
+ 76324,
+ 46456,
+ 716955,
+ 56471,
+ 59263,
+ 953414,
+ 127255,
+ 17319,
+ 46162,
+ 18652,
+ 105399,
+ 105563,
+ 35220,
+ 48328,
+ 72122,
+ 85619,
+ 37855,
+ 95232,
+ 129039,
+ 64009,
+ 195463,
+ 104077,
+ 32020,
+ 105111,
+ 334883,
+ 87614,
+ 93488,
+ 190490,
+ 113462,
+ 27256,
+ 70697,
+ 32679,
+ 50405,
+ 31559,
+ 1533971,
+ 84890,
+ 101801,
+ 104687,
+ 51238,
+ 43356,
+ 98826,
+ 109671,
+ 13853,
+ 203920,
+ 52263,
+ 98939,
+ 201104,
+ 102686,
+ 51594,
+ 212849,
+ 170098,
+ 84824,
+ 42859,
+ 534843,
+ 267025,
+ 127388,
+ 135301,
+ 151433,
+ 68533,
+ 43526,
+ 151252,
+ 154592,
+ 161916,
+ 44291,
+ 141603,
+ 81645,
+ 42693,
+ 82515,
+ 38991,
+ 150046,
+ 88049,
+ 245813,
+ 40409,
+ 29132,
+ 126158,
+ 61585,
+ 170496,
+ 112402,
+ 256491,
+ 94808,
+ 160226,
+ 55681,
+ 94047,
+ 151388,
+ 25059,
+ 107791,
+ 164954,
+ 130918,
+ 114964,
+ 48980,
+ 98215,
+ 81017,
+ 201074,
+ 96848,
+ 289174,
+ 139135,
+ 82942,
+ 779161,
+ 129911,
+ 117029,
+ 191355,
+ 154804,
+ 1924959,
+ 43048,
+ 366235,
+ 74670,
+ 21457,
+ 2131305]
+weighted_rmse:0.9200584409499015
+weighted_mae:0.6405466421999125
