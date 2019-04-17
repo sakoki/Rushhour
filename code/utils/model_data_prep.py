@@ -65,7 +65,6 @@ def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20):
     model.add(LSTM(units=16, return_sequences=True, input_shape=(x_train.shape[1], 1)))
     model.add(LSTM(units=16))
     model.add(Dense(1))
-    print
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
     history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=16, verbose=2)
     predict_speed = model.predict(X_test)
