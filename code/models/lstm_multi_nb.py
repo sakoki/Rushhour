@@ -65,7 +65,7 @@ if __name__ =="__main__":
         region_id_list.append(region_id)
         rmse_list.append(rmse)
         mae_list.append(mae)
-        break
+
 
     # weighted mae, weighted rmse
     weighted_rmse, weighted_mae  = weighted_avg(criteria_scores = [rmse_list, mae_list],region_list=region_id_list)
