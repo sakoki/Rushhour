@@ -965,3 +965,14 @@ Epoch 7/8
  - 3s - loss: 1.4867 - mean_absolute_error: 0.8495 - val_loss: 1.0941 - val_mean_absolute_error: 0.7245
 Epoch 8/8
  - 3s - loss: 1.4801 - mean_absolute_error: 0.8504 - val_loss: 1.0873 - val_mean_absolute_error: 0.7255
+Test RMSE: 0.881
+Test MAE: 0.647
+Train on 356 samples, validate on 119 samples
+Epoch 1/8
+ - 42s - loss: 26.8282 - mean_absolute_error: 5.1016 - val_loss: 21.3380 - val_mean_absolute_error: 4.5483
+Epoch 2/8
+ - 3s - loss: 14.5297 - mean_absolute_error: 3.7028 - val_loss: 10.3107 - val_mean_absolute_error: 3.1074
+Epoch 3/8
+ - 3s - loss: 6.3025 - mean_absolute_error: 2.3438 - val_loss: 3.9525 - val_mean_absolute_error: 1.8167
+Epoch 4/8
+ - 3s - loss: 2.0962 - mean_absolute_error: 1.1901 - val_loss: 1.3279 - val_mean_absolute_error: 0.8740
