@@ -77,7 +77,7 @@ def n_nearest_neighbors(graph, geoid):
     :return: list of nearest neighbor node id's
     :rtype: list of int
     """
-
+    geoid = int(geoid)
     # get the node number with the corresponding attribute
     node = lookup_geoid(graph, geoid)
     assert len(node) == 1, "More than one node have the specified geoid"
