@@ -12,5 +12,5 @@ if __name__ =="__main__":
 
     new_time_df_new = pd.read_csv(output_root+'/output/'+file_name, index_col = 0)
     x_train, y_train, X_test, Y_test = data_prepare_lstm(new_time_df_new,split_size = 0.7, time_window = 12)
-    history = LSTM_base(x_train, y_train, X_test, Y_test,epoch=8)
-    plot_lstm(history)  
+    history, lstm_rmse,lstm_mae = LSTM_base(x_train, y_train, X_test, Y_test,epoch=8)
+    plot_lstm(history)
