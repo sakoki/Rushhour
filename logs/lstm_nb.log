@@ -1,0 +1,30 @@
+Using TensorFlow backend.
+(92625, 24, 1)
+WARNING:tensorflow:From /Users/G_bgyl/anaconda3/envs/rushhour/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /Users/G_bgyl/anaconda3/envs/rushhour/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+Train on 69468 samples, validate on 23157 samples
+Epoch 1/8
+2019-04-17 15:16:51.927064: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2019-04-17 15:16:51.927527: I tensorflow/core/common_runtime/process_util.cc:71] Creating new thread pool with default inter op setting: 4. Tune using inter_op_parallelism_threads for best performance.
+ - 404s - loss: 3.9535 - mean_absolute_error: 1.2862 - val_loss: 3.3332 - val_mean_absolute_error: 1.1016
+Epoch 2/8
+ - 381s - loss: 2.6922 - mean_absolute_error: 1.0304 - val_loss: 3.1620 - val_mean_absolute_error: 1.0380
+Epoch 3/8
+ - 400s - loss: 2.5859 - mean_absolute_error: 0.9982 - val_loss: 3.3635 - val_mean_absolute_error: 1.0712
+Epoch 4/8
+ - 479s - loss: 2.5155 - mean_absolute_error: 0.9802 - val_loss: 3.2166 - val_mean_absolute_error: 1.0659
+Epoch 5/8
+ - 474s - loss: 2.4891 - mean_absolute_error: 0.9732 - val_loss: 3.3045 - val_mean_absolute_error: 1.0797
+Epoch 6/8
+ - 478s - loss: 2.4528 - mean_absolute_error: 0.9602 - val_loss: 3.1033 - val_mean_absolute_error: 1.0230
+Epoch 7/8
+ - 421s - loss: 2.4304 - mean_absolute_error: 0.9536 - val_loss: 3.1593 - val_mean_absolute_error: 1.0310
+Epoch 8/8
+ - 395s - loss: 2.3952 - mean_absolute_error: 0.9446 - val_loss: 3.2272 - val_mean_absolute_error: 1.1041
+Test RMSE: 1.442
+Test MAE: 0.909
+dict_keys(['val_loss', 'val_mean_absolute_error', 'loss', 'mean_absolute_error'])
