@@ -976,3 +976,11 @@ Epoch 3/8
  - 3s - loss: 6.3025 - mean_absolute_error: 2.3438 - val_loss: 3.9525 - val_mean_absolute_error: 1.8167
 Epoch 4/8
  - 3s - loss: 2.0962 - mean_absolute_error: 1.1901 - val_loss: 1.3279 - val_mean_absolute_error: 0.8740
+Epoch 5/8
+ - 3s - loss: 0.8742 - mean_absolute_error: 0.6910 - val_loss: 0.7552 - val_mean_absolute_error: 0.6285
+Epoch 6/8
+ - 3s - loss: 0.7444 - mean_absolute_error: 0.6462 - val_loss: 0.6918 - val_mean_absolute_error: 0.6294
+Epoch 7/8
+ - 3s - loss: 0.7359 - mean_absolute_error: 0.6461 - val_loss: 0.6977 - val_mean_absolute_error: 0.6273
+Epoch 8/8
+ - 3s - loss: 0.7346 - mean_absolute_error: 0.6459 - val_loss: 0.6862 - val_mean_absolute_error: 0.6297
