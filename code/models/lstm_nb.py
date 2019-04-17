@@ -30,6 +30,8 @@ def average_nb_ts(sample_time_series):
         nbs_df = pd.concat([nbs_df,nb_mean])
     nbs_df = nbs_df.set_index(sample_time_series.index)
     return nbs_df
+
+
 if __name__ =="__main__":
     split_size = 0.7
     sliding_window = 12
@@ -52,5 +54,5 @@ if __name__ =="__main__":
     Y_test_agg = Y_test
 
     print(x_train_agg.shape)
-    history = LSTM_base(x_train_agg, y_train_agg, X_test_agg, Y_test_agg, epoch=8)
+    history, lstm_rmse,lstm_mae = LSTM_base(x_train_agg, y_train_agg, X_test_agg, Y_test_agg, epoch=8)
     plot_lstm(history,attr='_nb')
