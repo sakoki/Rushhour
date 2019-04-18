@@ -1,0 +1,17 @@
+Train on 69468 samples, validate on 23157 samples
+Epoch 1/8
+ - 202s - loss: 3.2579 - mean_absolute_error: 1.0789 - val_loss: 3.0421 - val_mean_absolute_error: 1.0122
+Epoch 2/8
+ - 197s - loss: 2.3883 - mean_absolute_error: 0.9383 - val_loss: 3.0221 - val_mean_absolute_error: 1.0094
+Epoch 3/8
+ - 196s - loss: 2.3493 - mean_absolute_error: 0.9272 - val_loss: 3.0567 - val_mean_absolute_error: 1.0321
+Epoch 4/8
+ - 195s - loss: 2.3188 - mean_absolute_error: 0.9184 - val_loss: 2.9906 - val_mean_absolute_error: 0.9901
+Epoch 5/8
+ - 195s - loss: 2.2975 - mean_absolute_error: 0.9126 - val_loss: 3.0228 - val_mean_absolute_error: 1.0223
+Epoch 6/8
+ - 198s - loss: 2.2880 - mean_absolute_error: 0.9095 - val_loss: 3.0053 - val_mean_absolute_error: 0.9899
+Epoch 7/8
+ - 196s - loss: 2.2719 - mean_absolute_error: 0.9060 - val_loss: 3.0612 - val_mean_absolute_error: 1.0169
+Epoch 8/8
+ - 195s - loss: 2.2581 - mean_absolute_error: 0.9026 - val_loss: 3.0221 - val_mean_absolute_error: 0.9843
