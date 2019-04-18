@@ -8,10 +8,7 @@ from shapely.geometry import Point
 import sys # for import local function
 
 sys.path.insert(0,os.getcwd()+'/code/utils/')
-
-
 from toolkit import get_fname, generate_fname_wPath
-
 
 
 def SFDATA_file_cleaner(input_dir, output_dir, file_name):
@@ -27,32 +24,35 @@ def SFDATA_file_cleaner(input_dir, output_dir, file_name):
             # Apply formatting change to first line of file
             first = 0
             for line in old_file.readlines():
-                if first == 0:
-                    # Separate the header from the data
-                    line = re.sub(r'\t|\n|\s+', '', line)
-                    header = re.findall(r'[A-Z+?\_?]+', line)
-                    data = re.findall(r'[\-?\d+?\/?\.?\:?]+|\,(?=\,)', line)
+                try:
+                    if first == 0:
+                        # Separate the header from the data
+                        line = re.sub(r'\t|\n|\s+', '', line)
+                        header = re.findall(r'[A-Z+?\_?]+', line)
+                        data = re.findall(r'[\-?\d+?\/?\.?\:?]+|\,(?=\,)', line)
 
-                    # Split the date and time
-                    date = re.search(r'(\d{2}\/){2}\d{4}', data[1]).group(0)
-                    time = re.search(r'(\d{2}\:){2}\d{2}', data[1]).group(0)
-                    date = date + ' ' + time
+                        # Split the date and time
+                        date = re.search(r'(\d{2}\/){2}\d{4}', data[1]).group(0)
+                        time = re.search(r'(\d{2}\:){2}\d{2}', data[1]).group(0)
+                        date = date + ' ' + time
 
-                    # Remove the combined date and time and replace with split format
-                    data.remove(data[1])
-                    data.insert(1, date)
+                        # Remove the combined date and time and replace with split format
+                        data.remove(data[1])
+                        data.insert(1, date)
 
-                    # Replace comma with null space
-                    data = [x if x != ',' else '' for x in data]
-                    header = (',').join(header)
-                    data = (',').join(data)
-                    new_file.write(header + '\n')
-                    new_file.write(data + '\n')
-                    first += 1
-                else:
-                    if line != '\n':
-                        line = line.rstrip()
-                        new_file.write(line + '\n')
+                        # Replace comma with null space
+                        data = [x if x != ',' else '' for x in data]
+                        header = (',').join(header)
+                        data = (',').join(data)
+                        new_file.write(header + '\n')
+                        new_file.write(data + '\n')
+                        first += 1
+                    else:
+                        if line != '\n':
+                            line = line.rstrip()
+                            new_file.write(line + '\n')
+                except:
+                    print("Failed to read file: {}".format(file_name))
 
     print('{} cleaned'.format(file_name))
 
@@ -66,6 +66,8 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(r
     :param str output_dir: directory to save output files
     :param str file_name: name of file
     """
+
+    print("Mapping file: {}...".format(file_name))
 
     # dateparse = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %H:%M:%S')
     coordinates = pd.read_csv(input_dir + file_name,
@@ -89,43 +91,45 @@ def coordinate_mapper(shp_file, input_dir, output_dir, file_name, columns=list(r
     return mapped_coordinates
 
 
-def aggregate_to_region(input_path, output_path):
-    """ this function take a directory of time series data and target output directory string as input,
-    get region-based csv file as a preparation for prediction function later.
-    for now, this function is based on the output from 'def mapping_function()'
-    only need to run once for data preparation.
+def aggregate_by_region(input_dir, output_dir):
+    """Aggregate files by corresponding region ID (geoid10)
 
-    input:
-    input_path: a string of the path of input, contains one csv file for each day.
-                eg:'../output/sf_speed_data_clean/'
-    output_path: a string of the path of output, will contains one csv file for each region
-                eg:'../output/sf_speed_data_region/'
+    For each file, the script will partition data by region ID.
+    Each region ID file will get updated every time a new file is read,
+    Each of the resulting files will contain all data pertaining to a region ID.
 
-    output:
-    write files to output_path
+    :param str input_dir: directory containing input files
+    :param str output_dir: directory to save output files
+    :param str file_name: name of file
+    :return: table of all data for one region
+    :rtype: DataFrame
     """
-    out_file_attr = 'time_series_region'
-    f_names = get_fname(input_path, contains='2016')
-    # make sure whether the output dir exists or not.
 
-    for fname in f_names:
-        day_file = pd.read_csv(input_path + fname)
+    base_fname = 'time_series_region'
+    file_names = get_fname(input_dir, contains='2016')
 
-        # loop though data for each region and open only one region file each time to save memory
-        for region_id, group_df in day_file.groupby('geoid10'):  # TODO: may need to change column name
-            # make sure whether the region file has already exist
-            out_fname = generate_fname_wPath(output_path, attr=out_file_attr, region_id=region_id)
-            if os.path.exists(out_fname):
-                f = open(out_fname, 'a')
+    for file in file_names:
+        aggr_data = pd.read_csv(input_dir + file)
+
+        # Loop though data for each region
+        # open only one region file at a time to save memory
+        for region_id, group_df in aggr_data.groupby('geoid10'):
+            # Check if region file already exists
+            output_fname = '{}/{}_{}.csv'.format(output_dir, base_fname, region_id)
+            if os.path.exists(output_fname):
+                f = open(output_fname, 'a')
             else:
-                f = open(out_fname, 'w+')
-                f.write(','.join(day_file.columns) + '\n')
+                f = open(output_fname, 'w+')
+                f.write(','.join(aggr_data.columns) + '\n')
 
-            for _, rows in group_df.iterrows():
-                f.write(','.join([str(cell) for cell in list(rows)]) + '\n')
+            for i in group_df.itertuples():
+                f.write(','.join([str(cell) for cell in list(i)[1:]]) + '\n')
 
             f.close()
-        print('finished %s' % (fname))
+
+        print('finished partitioning {}'.format(file))
+
+    return
 
 
 # TO DO: FIll 0's with column means
@@ -144,7 +148,7 @@ def normalize(df, with_std=False):
     return df_scale
 
 
-def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', usecols=None):
+def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H', usecols=None, output_dir=None):
     """Takes all regional time series data from a directory and aggregates them into one time series at desired time
     frequency
 
@@ -161,6 +165,7 @@ def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H',
     :param str Y: name of column to be treated as the Y
     :param unit: specification of time granularity
     :param list usecols: specification of columns to read
+    :param str output_dir: directory to save output files
     :return: formatted table
     :rtype: DataFrame
     """
@@ -182,6 +187,10 @@ def region_by_time_generator(path, columns=['REPORT_TIME'], Y='SPEED', unit='H',
 
         # add into final result
         new_time_df = pd.concat([new_time_df, unit_aggregate])
+        print("Finished reading {}".format(name))
+
+    if output_dir:
+        new_time_df.to_csv(output_dir + 'region_by_time_series.csv', index=True)
 
     return new_time_df
 
