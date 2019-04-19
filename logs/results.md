@@ -7,3 +7,5 @@
 | LSTM  | Yes               |                                                           | Neighbor   | 0.9446    | 0.909    |
 | LSTM  |                   |                                                           | Twitter    | ???       | ???      |
 | LSTM  | Yes               |                                                           | Twitter    | ???       | ???      |
+| LSTM  |                   |                                                           | 5 month    |           | 1.104    |
+| ARIMA |                   |                                                           | 5 month    | N/A       | 0.8428   |
