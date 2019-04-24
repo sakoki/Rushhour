@@ -132,7 +132,7 @@ def plot_lstm(history,attr = ''):
     plt.ylabel('MAE')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig('output/lstm_mae%s.png'%(attr))
+    plt.savefig('graph/lstm_mae%s.png'%(attr))
     plt.show()
 
 def normalize(df, with_std=False):
