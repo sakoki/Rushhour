@@ -13,7 +13,7 @@ import networkx as nx
 
 
 sys.path.insert(0,os.getcwd()+'/code/utils/')
-from toolkit import load_pickle
+from toolkit import load_pickle,save_pickle
 from graph import n_nearest_neighbors
 
 def data_prepare_lstm(new_time_df_new,split_size = 0.7, time_window = 12):
@@ -25,12 +25,11 @@ def data_prepare_lstm(new_time_df_new,split_size = 0.7, time_window = 12):
     for i, row in new_time_df_new.iterrows():
         scaled_data = row.T.to_frame()
 
-        labels = scaled_data.index  # add label
-
         # creating train and test sets
         dataset = scaled_data.values
-
-        size = int(len(dataset) * split_size)
+        # TODO: for poster viz:
+        size = len(dataset)-1
+        # size = int(len(dataset) * split_size)
 
         train, test = dataset[0:size], dataset[size:len(dataset)]
 
@@ -51,7 +50,6 @@ def data_prepare_lstm(new_time_df_new,split_size = 0.7, time_window = 12):
 
         sub_X_test = []
         sub_Y_test = []
-        indexes = list()
         for i in range(time_window, inputs.shape[0]):
             sub_X_test.append(inputs[i - time_window:i])
             sub_Y_test.append(inputs[i])
@@ -81,7 +79,10 @@ def data_prepare_lstm_update(new_time_df_new,split_size = 0.7, time_window = 12)
         sub_x, sub_y = np.array(sub_x), np.array(sub_y)
         x = np.concatenate((x, sub_x), axis=0)
         y = np.concatenate((y, sub_y), axis=0)
-    size = int(len(y) * split_size)
+    # size = int(len(y) * split_size)
+    size = len(y) -1
+
+
     # creating train and test sets
     indices = list(range(len(y)))
     # random.shuffle(indices)
@@ -91,21 +92,37 @@ def data_prepare_lstm_update(new_time_df_new,split_size = 0.7, time_window = 12)
     return x_train, y_train, X_test, Y_test
 
 
-def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20):
+def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20,region_id = False):
 
     # create and fit the LSTM network
     model = Sequential()
-    model.add(LSTM(units=8, return_sequences=True, input_shape=(x_train.shape[1], 1)))
-    model.add(LSTM(units=8, return_sequences=True))
-    model.add(LSTM(units=8))
+    model.add(LSTM(units=16, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+    # model.add(LSTM(units=8, return_sequences=True))
+    model.add(LSTM(units=16))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
     history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=64, verbose=2)
     predict_speed = model.predict(X_test)
+
+
+    #TODO: poster viz
+    Y_dict = {}
+    predict_dict = {}
+
+    for i,id in enumerate(region_id):
+        print(i,id)
+        Y_dict[id] = Y_test[i][0]
+        predict_dict[id] = predict_speed[i][0]
+
+    save_pickle(Y_dict,'lstm_Y.p',path = '/Users/G_bgyl/si699/Rushhour/output/')
+    save_pickle(predict_dict, 'lstm_predict.p', path='/Users/G_bgyl/si699/Rushhour/output/')
+
     lstm_mse = mean_squared_error(Y_test, predict_speed)
     lstm_mae = mean_absolute_error(Y_test, predict_speed)
     print('Test MSE: %.3f' % lstm_mse)
     print('Test MAE: %.3f' % lstm_mae)
+
+    print(len(region_id), Y_test.shape, predict_speed.shape)
     return history, lstm_mse,lstm_mae
 
 def plot_lstm(history,attr = ''):
