@@ -85,7 +85,6 @@ def data_prepare_lstm_update(new_time_df_new,split_size = 0.7, time_window = 12)
     # creating train and test sets
     indices = list(range(len(y)))
     random.shuffle(indices)
-    print(indices)
     x_train, X_test = x[indices[0:size]], x[indices[size:len(x)]]
     y_train, Y_test = y[indices[0:size]], y[indices[size:len(x)]]
 
@@ -96,9 +95,9 @@ def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20):
 
     # create and fit the LSTM network
     model = Sequential()
-    model.add(LSTM(units=16, return_sequences=True, input_shape=(x_train.shape[1], 1)))
-    model.add(LSTM(units=16))
-    model.add(LSTM(units=16))
+    model.add(LSTM(units=8, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+    model.add(LSTM(units=8))
+    model.add(LSTM(units=8))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
     history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=16, verbose=2)
