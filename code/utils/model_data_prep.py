@@ -100,7 +100,7 @@ def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20):
     model.add(LSTM(units=8))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
-    history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=16, verbose=2)
+    history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=64, verbose=2)
     predict_speed = model.predict(X_test)
     lstm_rmse = np.sqrt(mean_squared_error(Y_test, predict_speed))
     lstm_mae = mean_absolute_error(Y_test, predict_speed)
@@ -122,7 +122,7 @@ def plot_lstm(history,attr = ''):
     plt.ylabel('rmse')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig('output/lstm_loss%s.png'%(attr))
+    plt.savefig('graph/lstm_loss%s.png'%(attr))
     plt.show()
 
     # "MAE"
