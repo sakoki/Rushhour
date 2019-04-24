@@ -4,32 +4,9 @@ sys.path.insert(0,os.getcwd()+'/code/utils/')
 
 # own functions
 
-from model_data_prep import data_prepare_lstm,LSTM_base,plot_lstm
-
-
-import networkx as nx
+from model_data_prep import data_prepare_lstm,LSTM_base,plot_lstm,average_nb_ts
 import numpy as np
-from graph import n_nearest_neighbors
 
-def average_nb_ts(sample_time_series):
-    # use graph to retrieve the neighbor of one target region, and get the average time series for all regions
-    G = nx.read_gpickle(os.getcwd()+'/output/census_filtered.gpickle')
-    geoids = [int(i.strip('region_')) for i in list(sample_time_series.index)]
-    nbs_df = pd.DataFrame()
-
-    for geoid in geoids:
-        nb_list = n_nearest_neighbors(G, geoid)
-        neighbor_df = pd.DataFrame()
-
-        for x in nb_list:
-            neighbor_data = sample_time_series.loc['region_' + str(x)].to_frame().T
-            neighbor_df = pd.concat([neighbor_df, neighbor_data])
-        #average for one region neighbors
-        nb_mean = neighbor_df.mean().to_frame().T
-        # concat all neighbor information for different regions together.
-        nbs_df = pd.concat([nbs_df,nb_mean])
-    nbs_df = nbs_df.set_index(sample_time_series.index)
-    return nbs_df
 
 
 if __name__ =="__main__":
@@ -40,15 +17,16 @@ if __name__ =="__main__":
 
     new_time_df_new = pd.read_csv(output_root+'/output/'+file_name, index_col = 0)
     print(new_time_df_new.shape)
-    length_col = len(new_time_df_new)-1
+    length_col = len(new_time_df_new)
     print(length_col)
 
     # # generate neighbor time series data
     # nbs_df = average_nb_ts(new_time_df_new)
     # print('finish generate neighbor df')
     
-    twitter_df= pd.read_csv('output/tweet_features_by_hour.csv',index_col=0)
-    twitter_df=twitter_df.append([twitter_df]*length_col,ignore_index=True)
+    twitter_df= pd.read_csv('output/tweet_features_by_hour.csv',index_col=0).loc['tweet_count'].to_frame().T
+    print(twitter_df.shape)
+    twitter_df=pd.concat([twitter_df]*length_col,ignore_index=True)
     print(twitter_df.shape)
     # generate target time series train data
     x_train, y_train, X_test, Y_test = data_prepare_lstm(new_time_df_new, split_size=split_size, time_window=sliding_window)
