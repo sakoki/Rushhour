@@ -1,0 +1,21 @@
+Train on 70024 samples, validate on 23342 samples
+Epoch 1/8
+2019-04-23 21:50:13.805443: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2019-04-23 21:50:13.807015: I tensorflow/core/common_runtime/process_util.cc:71] Creating new thread pool with default inter op setting: 4. Tune using inter_op_parallelism_threads for best performance.
+ - 217s - loss: 3.2052 - mean_absolute_error: 1.0691 - val_loss: 2.4525 - val_mean_absolute_error: 0.9338
+Epoch 2/8
+ - 207s - loss: 2.3289 - mean_absolute_error: 0.9102 - val_loss: 2.4218 - val_mean_absolute_error: 0.9152
+Epoch 3/8
+ - 222s - loss: 2.2906 - mean_absolute_error: 0.9006 - val_loss: 2.3362 - val_mean_absolute_error: 0.9015
+Epoch 4/8
+ - 217s - loss: 2.2684 - mean_absolute_error: 0.8935 - val_loss: 2.3054 - val_mean_absolute_error: 0.8870
+Epoch 5/8
+ - 220s - loss: 2.2496 - mean_absolute_error: 0.8870 - val_loss: 2.3622 - val_mean_absolute_error: 0.8966
+Epoch 6/8
+ - 227s - loss: 2.2391 - mean_absolute_error: 0.8840 - val_loss: 2.3019 - val_mean_absolute_error: 0.9055
+Epoch 7/8
+ - 225s - loss: 2.2316 - mean_absolute_error: 0.8814 - val_loss: 2.2765 - val_mean_absolute_error: 0.8788
+Epoch 8/8
+ - 238s - loss: 2.2160 - mean_absolute_error: 0.8786 - val_loss: 2.2723 - val_mean_absolute_error: 0.8788
+Test RMSE: 1.506
+Test MAE: 0.874
