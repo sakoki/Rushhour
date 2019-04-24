@@ -1,0 +1,20 @@
+Train on 70024 samples, validate on 23342 samples
+Epoch 1/8
+ - 91s - loss: 8.5419 - mean_absolute_error: 1.9235 - val_loss: 3.7997 - val_mean_absolute_error: 1.1636
+Epoch 2/8
+ - 2528s - loss: 3.0665 - mean_absolute_error: 1.0402 - val_loss: 2.7765 - val_mean_absolute_error: 0.9743
+Epoch 3/8
+ - 81s - loss: 2.5526 - mean_absolute_error: 0.9464 - val_loss: 2.5511 - val_mean_absolute_error: 0.9518
+Epoch 4/8
+ - 73s - loss: 2.4253 - mean_absolute_error: 0.9234 - val_loss: 2.4617 - val_mean_absolute_error: 0.9227
+Epoch 5/8
+ - 74s - loss: 2.3794 - mean_absolute_error: 0.9120 - val_loss: 2.4407 - val_mean_absolute_error: 0.9249
+Epoch 6/8
+ - 73s - loss: 2.3551 - mean_absolute_error: 0.9057 - val_loss: 2.4072 - val_mean_absolute_error: 0.9070
+Epoch 7/8
+ - 75s - loss: 2.3362 - mean_absolute_error: 0.9026 - val_loss: 2.4191 - val_mean_absolute_error: 0.9241
+Epoch 8/8
+ - 75s - loss: 2.3219 - mean_absolute_error: 0.8986 - val_loss: 2.3948 - val_mean_absolute_error: 0.9031
+Test RMSE: 1.510
+Test MAE: 0.883
+dict_keys(['val_loss', 'val_mean_absolute_error', 'loss', 'mean_absolute_error'])
