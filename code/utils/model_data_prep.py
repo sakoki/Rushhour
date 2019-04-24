@@ -84,10 +84,9 @@ def data_prepare_lstm_update(new_time_df_new,split_size = 0.7, time_window = 12)
     size = int(len(y) * split_size)
     # creating train and test sets
     indices = list(range(len(y)))
-    random.shuffle(indices)
-    print(indices)
+    # random.shuffle(indices)
     x_train, X_test = x[indices[0:size]], x[indices[size:len(x)]]
-    y_train, Y_test = y[indices[0:size]], y[indices[size:len(x)]]
+    y_train, Y_test = y[indices[0:size]], y[indices[size:len(y)]]
 
     return x_train, y_train, X_test, Y_test
 
@@ -96,18 +95,18 @@ def LSTM_base(x_train, y_train, X_test, Y_test, epoch = 20):
 
     # create and fit the LSTM network
     model = Sequential()
-    model.add(LSTM(units=16, return_sequences=True, input_shape=(x_train.shape[1], 1)))
-    model.add(LSTM(units=16))
-    model.add(LSTM(units=16))
+    model.add(LSTM(units=8, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+    model.add(LSTM(units=8, return_sequences=True))
+    model.add(LSTM(units=8))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae'])
-    history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=16, verbose=2)
+    history = model.fit(x_train, y_train, epochs=epoch, validation_split=0.25, batch_size=64, verbose=2)
     predict_speed = model.predict(X_test)
-    lstm_rmse = np.sqrt(mean_squared_error(Y_test, predict_speed))
+    lstm_mse = mean_squared_error(Y_test, predict_speed)
     lstm_mae = mean_absolute_error(Y_test, predict_speed)
-    print('Test RMSE: %.3f' % lstm_rmse)
+    print('Test MSE: %.3f' % lstm_mse)
     print('Test MAE: %.3f' % lstm_mae)
-    return history, lstm_rmse,lstm_mae
+    return history, lstm_mse,lstm_mae
 
 def plot_lstm(history,attr = ''):
 
@@ -123,7 +122,7 @@ def plot_lstm(history,attr = ''):
     plt.ylabel('rmse')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig('output/lstm_loss%s.png'%(attr))
+    plt.savefig('graph/lstm_loss%s.png'%(attr))
     plt.show()
 
     # "MAE"
@@ -133,7 +132,7 @@ def plot_lstm(history,attr = ''):
     plt.ylabel('MAE')
     plt.xlabel('epoch')
     plt.legend(['train', 'validation'], loc='upper left')
-    plt.savefig('output/lstm_mae%s.png'%(attr))
+    plt.savefig('graph/lstm_mae%s.png'%(attr))
     plt.show()
 
 def normalize(df, with_std=False):
